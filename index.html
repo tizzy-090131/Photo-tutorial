@@ -10,11 +10,13 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 .page-header{text-align:center;margin-bottom:48px}
 .page-title{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-0.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
 .page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:60px 24px;max-width:1100px;margin:0 auto}
+/* PC端：组间距加大到80px */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:80px 24px;max-width:1100px;margin:0 auto}
 .apple-card{background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.06);border-radius:24px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);padding:24px 20px 22px}
-.group-title{font-size:16px;font-weight:600;text-align:center;margin-bottom:18px}
-.img-wrap{position:relative;min-height:240px;margin-bottom:16px}
-.img-wrap img{width:100%;border-radius:16px;object-fit:cover;cursor:pointer;transition:.4s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.group-title{font-size:16px;font-weight:600;text-align:center;margin-bottom:20px}
+/* 图片容器固定竖图比例，匹配你这张海边照片 */
+.img-wrap{position:relative;width:100%;aspect-ratio:390/569;margin-bottom:16px}
+.img-wrap img{width:100%;height:100%;border-radius:16px;object-fit:cover;cursor:pointer;transition:.4s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 20px rgba(0,0,0,.1)}
 .img-wrap .img-1{position:absolute;top:0;left:0;z-index:2;transform:rotate(-2deg)}
 .img-wrap .img-2{position:absolute;top:0;left:0;z-index:1;transform:rotate(2deg)}
 .img-wrap.open .img-1,.img-wrap.open .img-2{position:static;transform:rotate(0)}
@@ -29,7 +31,8 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 .lightbox-img:active{cursor:grabbing}
 .lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .lightbox-close:hover{background:rgba(255,255,255,.24)}
-@media (max-width:480px){body{padding:36px 14px}.gallery{grid-template-columns:1fr;gap:48px}.apple-card{padding:18px 16px 18px;border-radius:20px}}
+/*移动端：组间距加大到64px */
+@media (max-width:480px){body{padding:36px 14px}.gallery{grid-template-columns:1fr;gap:64px}.apple-card{padding:18px 16px 18px;border-radius:20px}}
 </style>
 </head>
 <body>
@@ -41,8 +44,8 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <section class="apple-card">
 <h2 class="group-title">第1组</h2>
 <div class="img-wrap">
-<img class="img-1" src="01.jpg" onclick="openLightbox(this.src)">
-<img class="img-2" src="02.jpg" onclick="openLightbox(this.src)">
+<img class="img-1" src="012.jpg" onclick="openLightbox(this.src)">
+<img class="img-2" src="02 (2).jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
