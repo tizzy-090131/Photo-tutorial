@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mint Water Photography</title>
+<title>Mint 照片集</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
-:root{--text:#1d1d1f;--card:rgba(255,255,255,.72);--border:rgba(0,0,0,.06);--shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12)}
-body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;padding:56px 20px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Arial;color:var(--text)}
-.page-header{text-align:center;margin-bottom:64px}
-.page-title{font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-.03em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.16);margin-bottom:14px}
-.page-subtitle{font-size:17px;color:rgba(255,255,255,.82)}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px 24px;max-width:1100px;margin:0 auto}
-.apple-card{background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);padding:24px 20px 22px}
+body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;padding:56px 20px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;color:#1d1d1f}
+.page-header{text-align:center;margin-bottom:48px}
+.page-title{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-0.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:60px 24px;max-width:1100px;margin:0 auto}
+.apple-card{background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.06);border-radius:24px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);padding:24px 20px 22px}
 .group-title{font-size:16px;font-weight:600;text-align:center;margin-bottom:18px}
 .img-wrap{position:relative;min-height:240px;margin-bottom:16px}
 .img-wrap img{width:100%;border-radius:16px;object-fit:cover;cursor:pointer;transition:.4s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 20px rgba(0,0,0,.1)}
@@ -20,8 +19,9 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 .img-wrap .img-2{position:absolute;top:0;left:0;z-index:1;transform:rotate(2deg)}
 .img-wrap.open .img-1,.img-wrap.open .img-2{position:static;transform:rotate(0)}
 .img-wrap.open .img-1{margin-bottom:14px}
-.toggle-btn{width:100%;padding:11px;border:none;border-radius:14px;background:#007aff;color:#fff;font-size:16px;cursor:pointer;transition:.25s}
-.toggle-btn:hover{background:#0066dd}
+/* 微信悬浮小按钮，浮在图片右下角 */
+.toggle-btn{position:absolute;right:12px;bottom:12px;padding:6px 12px;border:none;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:14px;cursor:pointer;transition:.2s}
+.toggle-btn:hover{background:rgba(0,0,0,.7)}
 /* 缩放弹窗 */
 .lightbox{position:fixed;inset:0;background:rgba(22,22,23,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden}
 .lightbox.active{display:flex}
@@ -29,13 +29,13 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 .lightbox-img:active{cursor:grabbing}
 .lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .lightbox-close:hover{background:rgba(255,255,255,.24)}
-@media (max-width:480px){body{padding:36px 14px}.gallery{grid-template-columns:1fr;gap:30px}.apple-card{padding:18px 16px 18px;border-radius:20px}}
+@media (max-width:480px){body{padding:36px 14px}.gallery{grid-template-columns:1fr;gap:48px}.apple-card{padding:18px 16px 18px;border-radius:20px}}
 </style>
 </head>
 <body>
 <header class="page-header">
-<h1 class="page-title">Mint Water Photography</h1>
-<p class="page-subtitle">19组照片 · 微信堆叠展开，图片支持滚轮/双指缩放</p>
+<h1 class="page-title">Mint 照片集</h1>
+<p class="page-sub">微信堆叠样式，图片支持滚轮/双指缩放</p>
 </header>
 <main class="gallery">
 <section class="apple-card">
@@ -43,152 +43,152 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <div class="img-wrap">
 <img class="img-1" src="01.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="02.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第2组</h2>
 <div class="img-wrap">
 <img class="img-1" src="03.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="04.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第3组</h2>
 <div class="img-wrap">
 <img class="img-1" src="05.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="06.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第4组</h2>
 <div class="img-wrap">
 <img class="img-1" src="07.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="08.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第5组</h2>
 <div class="img-wrap">
 <img class="img-1" src="09.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="10.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第6组</h2>
 <div class="img-wrap">
 <img class="img-1" src="11.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="12.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第7组</h2>
 <div class="img-wrap">
 <img class="img-1" src="13.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="14.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第8组</h2>
 <div class="img-wrap">
 <img class="img-1" src="15.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="16.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第9组</h2>
 <div class="img-wrap">
 <img class="img-1" src="17.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="18.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第10组</h2>
 <div class="img-wrap">
 <img class="img-1" src="19.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="20.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第11组</h2>
 <div class="img-wrap">
 <img class="img-1" src="21.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="22.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第12组</h2>
 <div class="img-wrap">
 <img class="img-1" src="23.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="24.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第13组</h2>
 <div class="img-wrap">
 <img class="img-1" src="25.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="26.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第14组</h2>
 <div class="img-wrap">
 <img class="img-1" src="27.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="28.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第15组</h2>
 <div class="img-wrap">
 <img class="img-1" src="29.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="30.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第16组</h2>
 <div class="img-wrap">
 <img class="img-1" src="31.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="32.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第17组</h2>
 <div class="img-wrap">
 <img class="img-1" src="33.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="34.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第18组</h2>
 <div class="img-wrap">
 <img class="img-1" src="35.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="36.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 <section class="apple-card">
 <h2 class="group-title">第19组</h2>
 <div class="img-wrap">
 <img class="img-1" src="37.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="38.jpg" onclick="openLightbox(this.src)">
-</div>
 <button class="toggle-btn">展开2</button>
+</div>
 </section>
 </main>
 <div class="lightbox" id="lightbox">
@@ -196,15 +196,14 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <img class="lightbox-img" id="lightboxImg">
 </div>
 <script>
-//展开收起按钮
 document.querySelectorAll('.toggle-btn').forEach(btn=>{
-btn.onclick=function(){
-const wrap=this.previousElementSibling;
+btn.onclick=function(e){
+e.stopPropagation();
+const wrap=this.parentElement;
 wrap.classList.toggle('open');
 this.innerText=wrap.classList.contains('open')?'收起':'展开2';
 }
 })
-//图片缩放预览
 const lightbox=document.getElementById('lightbox');
 const lightboxImg=document.getElementById('lightboxImg');
 let scale=1,posX=0,posY=0,isDrag=false,startX,startY;
@@ -219,14 +218,12 @@ function closeLightbox(){
 lightbox.classList.remove('active');
 document.body.style.overflow='';
 }
-//滚轮缩放
 lightboxImg.addEventListener('wheel',e=>{
 e.preventDefault();
 const delta=e.deltaY<0 ? 0.12 : -0.12;
 scale=Math.max(0.4,Math.min(scale+delta,4));
 lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
 })
-//拖拽
 lightboxImg.addEventListener('mousedown',e=>{isDrag=true;startX=e.clientX-posX;startY=e.clientY-posY})
 document.addEventListener('mousemove',e=>{
 if(!isDrag) return;
@@ -234,7 +231,6 @@ posX=e.clientX-startX;posY=e.clientY-startY;
 lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
 })
 document.addEventListener('mouseup',()=>isDrag=false)
-//手机双指缩放
 let touchDist=0;
 lightboxImg.addEventListener('touchstart',e=>{
 if(e.touches.length===2){touchDist=Math.hypot(e.touches[0].pageX-e.touches[1].pageX,e.touches[0].pageY-e.touches[1].pageY)}
