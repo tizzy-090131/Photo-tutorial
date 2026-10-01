@@ -1,337 +1,418 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mint Water Photography</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  -webkit-font-smoothing: antialiased;
-}
-body{
-  /* 背景 pattern-BG.png */
-  background-image: url("pattern-BG.png");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  padding:40px 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", PingFang SC, sans-serif;
-}
-.wrapper{
-  max-width:820px;
-  margin:0 auto;
-}
-h1{
-  text-align:center;
-  color:#fff;
-  margin-bottom:42px;
-  font-size:38px;
-  font-weight:600;
-  letter-spacing:-0.02em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
-}
-/* 苹果风卡片 */
-.stack-box{
-  background:rgba(255,255,255,0.72);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border-radius:22px;
-  padding:24px;
-  margin-bottom:26px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.08);
-  border:1px solid rgba(255,255,255,0.4);
-}
-.stack-box h3{
-  font-size:20px;
-  color:#1d1d1f;
-  margin-bottom:14px;
-  font-weight:600;
-}
-.img-wrap{
-  position:relative;
-  height:340px;
-  overflow:hidden;
-  border-radius:18px;
-  margin-bottom:16px;
-}
-.img-wrap img{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:opacity 0.4s cubic-bezier(0.2,0,0.2,1);
-  cursor:pointer;
-}
-.img-wrap .img-bottom{
-  opacity:1;
-}
-.img-wrap .img-top{
-  opacity:0;
-}
-.img-wrap.active .img-bottom{
-  opacity:0;
-}
-.img-wrap.active .img-top{
-  opacity:1;
-}
-.expand-btn{
-  width:100%;
-  padding:12px;
-  border:none;
-  background:#007aff;
-  color:#ffffff;
-  border-radius:12px;
-  font-size:17px;
-  cursor:pointer;
-  transition:background 0.25s ease;
-}
-.expand-btn:hover{
-  background:#0066dd;
-}
-/* ========== 苹果风大图弹窗 Lightbox ========== */
-.lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
-.lightbox.active{
-  display:flex;
-}
-.lightbox img{
-  max-width:92%;
-  max-height:90vh;
-  border-radius:18px;
-  box-shadow:0 30px 70px rgba(0,0,0,0.35);
-}
-</style>
-</head>
-<body>
-<div class="wrapper">
-<h1>Mint Water Photography</h1>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-<div class="stack-box g1">
-  <h3>第1组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="01.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="02.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  :root {
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --card: rgba(255, 255, 255, 0.72);
+    --border: rgba(0, 0, 0, 0.06);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
 
-<div class="stack-box g2">
-  <h3>第2组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="03.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="04.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  body {
+    background-image: url("pattern-BG.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 56px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    color: var(--text);
+  }
 
-<div class="stack-box g3">
-  <h3>第3组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="05.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="06.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .page-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
 
-<div class="stack-box g4">
-  <h3>第4组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="07.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="08.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .page-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.16);
+    margin-bottom: 14px;
+  }
 
-<div class="stack-box g5">
-  <h3>第5组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="09.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="10.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .page-subtitle {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.82);
+  }
 
-<div class="stack-box g6">
-  <h3>第6组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="11.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="12.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 19组网格 */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-<div class="stack-box g7">
-  <h3>第7组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="13.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="14.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 苹果风卡片 */
+  .apple-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 24px 18px 22px;
+    text-align: center;
+  }
 
-<div class="stack-box g8">
-  <h3>第8组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="15.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="16.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .group-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
 
-<div class="stack-box g9">
-  <h3>第9组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="17.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="18.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 叠图容器 */
+  .img-stack {
+    position: relative;
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
 
-<div class="stack-box g10">
-  <h3>第10组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="19.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="20.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .img-stack img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
 
-<div class="stack-box g11">
-  <h3>第11组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="21.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="22.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 两张图叠放 */
+  .img-stack img:nth-child(1) {
+    transform: rotate(-2.5deg);
+    z-index: 1;
+  }
 
-<div class="stack-box g12">
-  <h3>第12组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="23.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="24.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .img-stack img:nth-child(2) {
+    transform: rotate(2deg);
+    z-index: 2;
+  }
 
-<div class="stack-box g13">
-  <h3>第13组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="25.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="26.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 悬停散开 */
+  .img-stack:hover img:nth-child(1) {
+    transform: rotate(-4deg) translateX(-18px);
+  }
 
-<div class="stack-box g14">
-  <h3>第14组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="27.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="28.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .img-stack:hover img:nth-child(2) {
+    transform: rotate(3deg) translateX(18px);
+  }
 
-<div class="stack-box g15">
-  <h3>第15组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="29.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="30.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .img-stack img:hover {
+    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.2);
+  }
 
-<div class="stack-box g16">
-  <h3>第16组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="31.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="32.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  /* 大图预览 */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(22, 22, 23, 0.86);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
 
-<div class="stack-box g17">
-  <h3>第17组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="33.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="34.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .lightbox.active {
+    display: flex;
+  }
 
-<div class="stack-box g18">
-  <h3>第18组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="35.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="36.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .lightbox img {
+    max-width: 92%;
+    max-height: 88vh;
+    border-radius: 16px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+  }
 
-<div class="stack-box g19">
-  <h3>第19组 拍摄技巧</h3>
-  <div class="img-wrap">
-    <img class="img-bottom" src="37.jpg" onclick="openLightbox(this.src)">
-    <img class="img-top" src="38.jpg" onclick="openLightbox(this.src)">
-  </div>
-  <button class="expand-btn">展开2</button>
-</div>
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    color: #f5f5f7;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
 
-</div>
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
 
-<!-- 大图预览弹窗 -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <img id="lightImg" src="">
-</div>
+  /* 移动端适配 */
+  @media (max-width: 480px) {
+    body {
+      padding: 36px 14px;
+    }
 
-<script>
-// 展开收起按钮逻辑
-const btns = document.querySelectorAll('.expand-btn');
-btns.forEach(btn=>{
-  btn.onclick = function(){
-    const wrap = this.previousElementSibling;
-    wrap.classList.toggle('active');
-    if(wrap.classList.contains('active')){
-      this.textContent = "收起";
-    }else{
-      this.textContent = "展开2";
+    .gallery {
+      gap: 60px 14px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .apple-card {
+      padding: 18px 12px 18px;
+      border-radius: 20px;
+    }
+
+    .img-stack {
+      width: 150px;
+      height: 200px;
+    }
+
+    .img-stack img {
+      width: 130px;
+      height: 180px;
     }
   }
-})
+</style>
+</head>
 
-// 图片放大预览
-const lb = document.getElementById('lightbox');
-const lbImg = document.getElementById('lightImg');
-function openLightbox(src){
-  lbImg.src = src;
-  lb.classList.add('active');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(){
-  lb.classList.remove('active');
-  document.body.style.overflow='';
-}
-// ESC按键关闭大图
-document.addEventListener('keydown',e=>{
-  if(e.key === 'Escape') closeLightbox();
-})
+<body>
+
+  <header class="page-header">
+    <h1 class="page-title">Mint Water Photography</h1>
+    <p class="page-subtitle">19组照片教程 · 悬停展开，点击放大预览</p>
+  </header>
+
+  <main class="gallery">
+
+    <!-- 第1组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第1组</h2>
+      <div class="img-stack">
+        <img src="01.jpg" alt="照片教程 1-1" onclick="openLightbox(this.src)" />
+        <img src="02.jpg" alt="照片教程 1-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第2组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第2组</h2>
+      <div class="img-stack">
+        <img src="03.jpg" alt="照片教程 2-1" onclick="openLightbox(this.src)" />
+        <img src="04.jpg" alt="照片教程 2-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第3组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第3组</h2>
+      <div class="img-stack">
+        <img src="05.jpg" alt="照片教程 3-1" onclick="openLightbox(this.src)" />
+        <img src="06.jpg" alt="照片教程 3-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第4组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第4组</h2>
+      <div class="img-stack">
+        <img src="07.jpg" alt="照片教程 4-1" onclick="openLightbox(this.src)" />
+        <img src="08.jpg" alt="照片教程 4-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第5组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第5组</h2>
+      <div class="img-stack">
+        <img src="09.jpg" alt="照片教程 5-1" onclick="openLightbox(this.src)" />
+        <img src="10.jpg" alt="照片教程 5-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第6组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第6组</h2>
+      <div class="img-stack">
+        <img src="11.jpg" alt="照片教程 6-1" onclick="openLightbox(this.src)" />
+        <img src="12.jpg" alt="照片教程 6-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第7组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第7组</h2>
+      <div class="img-stack">
+        <img src="13.jpg" alt="照片教程 7-1" onclick="openLightbox(this.src)" />
+        <img src="14.jpg" alt="照片教程 7-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第8组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第8组</h2>
+      <div class="img-stack">
+        <img src="15.jpg" alt="照片教程 8-1" onclick="openLightbox(this.src)" />
+        <img src="16.jpg" alt="照片教程 8-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第9组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第9组</h2>
+      <div class="img-stack">
+        <img src="17.jpg" alt="照片教程 9-1" onclick="openLightbox(this.src)" />
+        <img src="18.jpg" alt="照片教程 9-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第10组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第10组</h2>
+      <div class="img-stack">
+        <img src="19.jpg" alt="照片教程 10-1" onclick="openLightbox(this.src)" />
+        <img src="20.jpg" alt="照片教程 10-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第11组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第11组</h2>
+      <div class="img-stack">
+        <img src="21.jpg" alt="照片教程 11-1" onclick="openLightbox(this.src)" />
+        <img src="22.jpg" alt="照片教程 11-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第12组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第12组</h2>
+      <div class="img-stack">
+        <img src="23.jpg" alt="照片教程 12-1" onclick="openLightbox(this.src)" />
+        <img src="24.jpg" alt="照片教程 12-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第13组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第13组</h2>
+      <div class="img-stack">
+        <img src="25.jpg" alt="照片教程 13-1" onclick="openLightbox(this.src)" />
+        <img src="26.jpg" alt="照片教程 13-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第14组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第14组</h2>
+      <div class="img-stack">
+        <img src="27.jpg" alt="照片教程 14-1" onclick="openLightbox(this.src)" />
+        <img src="28.jpg" alt="照片教程 14-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第15组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第15组</h2>
+      <div class="img-stack">
+        <img src="29.jpg" alt="照片教程 15-1" onclick="openLightbox(this.src)" />
+        <img src="30.jpg" alt="照片教程 15-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第16组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第16组</h2>
+      <div class="img-stack">
+        <img src="31.jpg" alt="照片教程 16-1" onclick="openLightbox(this.src)" />
+        <img src="32.jpg" alt="照片教程 16-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第17组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第17组</h2>
+      <div class="img-stack">
+        <img src="33.jpg" alt="照片教程 17-1" onclick="openLightbox(this.src)" />
+        <img src="34.jpg" alt="照片教程 17-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第18组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第18组</h2>
+      <div class="img-stack">
+        <img src="35.jpg" alt="照片教程 18-1" onclick="openLightbox(this.src)" />
+        <img src="36.jpg" alt="照片教程 18-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+    <!-- 第19组 -->
+    <section class="apple-card">
+      <h2 class="group-title">第19组</h2>
+      <div class="img-stack">
+        <img src="37.jpg" alt="照片教程 19-1" onclick="openLightbox(this.src)" />
+        <img src="38.jpg" alt="照片教程 19-2" onclick="openLightbox(this.src)" />
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 大图预览 -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightImg" src="" alt="大图预览" />
+  </div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightImg = document.getElementById("lightImg");
+
+  function openLightbox(src) {
+    lightImg.src = src;
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeLightbox();
+  });
 </script>
+
 </body>
 </html>
