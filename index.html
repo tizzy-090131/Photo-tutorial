@@ -5,41 +5,247 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mint Water Photography</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;}
-body{background:#f5f5f7;color:#1d1d1f;}
-/* 顶满屏幕的英文标题 */
-.header-bar{width:100%;padding:20px 0;text-align:center;background:#ffcc00;}
-.header-title{font-size:32px;font-weight:600;letter-spacing:0.5px;}
-/* 微信风叠图容器 */
-.stack-area{max-width:600px;margin:30px auto;padding:0 20px;}
-.stack-box{position:relative;height:320px;}
-/* 占位图框，之后换你自己的图 */
-.stack-slot{position:absolute;width:85%;left:50%;transform:translateX(-50%);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,0.12);height:280px;background:#e8e8ed;cursor:pointer;transition:all 0.3s ease;}
-.s1{top:0;z-index:3;}
-.s2{top:16px;z-index:2;}
-.s3{top:32px;z-index:1;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;
+}
+
+body{
+  background:#f5f5f7;
+  color:#1d1d1f;
+  position:relative;
+  overflow-x:hidden;
+  padding-bottom:60px;
+}
+
+/* 可爱贴纸：只放在边角，不遮挡图片 */
+.sticker{
+  position:absolute;
+  opacity:0.22;
+  pointer-events:none;
+  z-index:0;
+}
+.sticker-leaf{
+  top:70px;
+  right:18px;
+  width:64px;
+}
+.sticker-drop{
+  bottom:90px;
+  left:14px;
+  width:48px;
+}
+.sticker-mint{
+  top:420px;
+  left:22px;
+  width:52px;
+  opacity:0.18;
+}
+.sticker-bubble{
+  top:900px;
+  right:26px;
+  width:56px;
+  opacity:0.2;
+}
+
+/* 标题：小字号、靠左、无黄色背景 */
+.page-header{
+  padding:28px 22px 18px;
+  position:relative;
+  z-index:1;
+}
+.page-title{
+  font-size:20px;
+  font-weight:500;
+  letter-spacing:0.3px;
+}
+
+/* 多组叠图容器 */
+.groups{
+  max-width:640px;
+  margin:0 auto;
+  padding:0 20px;
+  position:relative;
+  z-index:1;
+}
+
+.photo-group{
+  margin-bottom:56px;
+}
+
+.group-name{
+  font-size:16px;
+  font-weight:500;
+  color:#424245;
+  margin:0 0 14px 4px;
+}
+
+.stack-box{
+  position:relative;
+  height:320px;
+}
+
+/* 每张叠图卡片 */
+.stack-slot{
+  position:absolute;
+  width:86%;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(0,0,0,0.14);
+  height:280px;
+  background:#e8e8ed;
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  transition:top 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.g1-s1{top:0;   z-index:3;}
+.g1-s2{top:16px;z-index:2;}
+.g1-s3{top:32px;z-index:1;}
+
+.g2-s1{top:0;   z-index:3;}
+.g2-s2{top:16px;z-index:2;}
+.g2-s3{top:32px;z-index:1;}
+
+.g3-s1{top:0;   z-index:3;}
+.g3-s2{top:16px;z-index:2;}
+.g3-s3{top:32px;z-index:1;}
+
+.g4-s1{top:0;   z-index:3;}
+.g4-s2{top:16px;z-index:2;}
+.g4-s3{top:32px;z-index:1;}
+
 /* 展开按钮 */
-.expand-btn{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:6px 12px;border-radius:12px;font-size:14px;cursor:pointer;}
+.expand-btn{
+  position:absolute;
+  bottom:-34px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#2c2c2e;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:99px;
+  font-size:14px;
+  cursor:pointer;
+  border:none;
+  z-index:10;
+}
+
 /* 全屏预览 */
-.preview{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:999;padding:20px;}
-.preview img{max-width:100%;max-height:90vh;border-radius:12px;}
-.preview.active{display:flex;}
+.preview{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.93);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:20px;
+}
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:14px;
+}
+.preview.active{
+  display:flex;
+}
+
+/* 收起状态：恢复堆叠 */
+.stack-box.collapsed .g1-s1{top:0;}
+.stack-box.collapsed .g1-s2{top:16px;}
+.stack-box.collapsed .g1-s3{top:32px;}
+
+.stack-box.collapsed .g2-s1{top:0;}
+.stack-box.collapsed .g2-s2{top:16px;}
+.stack-box.collapsed .g2-s3{top:32px;}
+
+.stack-box.collapsed .g3-s1{top:0;}
+.stack-box.collapsed .g3-s2{top:16px;}
+.stack-box.collapsed .g3-s3{top:32px;}
+
+.stack-box.collapsed .g4-s1{top:0;}
+.stack-box.collapsed .g4-s2{top:16px;}
+.stack-box.collapsed .g4-s3{top:32px;}
 </style>
 </head>
 <body>
-<div class="header-bar">
-  <div class="header-title">Mint Water Photography</div>
+
+<!-- 边角可爱贴纸 -->
+<svg class="sticker sticker-leaf" viewBox="0 0 24 24" fill="#34a853">
+  <path d="M12 2C7.5 2 4 5.5 4 12s8 10 8 10 8-6 8-10S16.5 2 12 2zm0 16c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/>
+</svg>
+<svg class="sticker sticker-drop" viewBox="0 0 24 24" fill="#4285f4">
+  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+</svg>
+<svg class="sticker sticker-mint" viewBox="0 0 24 24" fill="#0f9d58">
+  <path d="M6 3c-1.5 0-3 1-3 3v6c0 5 4 9 9 9s9-4 9-9V6c0-2-1.5-3-3-3s-3 1-3 3c0-2-1.5-3-3-3s-3 1-3 3c0-2-1.5-3-3-3z"/>
+</svg>
+<svg class="sticker sticker-bubble" viewBox="0 0 24 24" fill="#5f6368">
+  <circle cx="6" cy="8" r="2"/>
+  <circle cx="14" cy="6" r="1.4"/>
+  <circle cx="10" cy="14" r="1.8"/>
+</svg>
+
+<!-- 顶部英文标题 -->
+<div class="page-header">
+  <div class="page-title">Mint Water Photography</div>
 </div>
 
-<div class="stack-area">
-  <div class="stack-box">
-    <div class="stack-slot s1" onclick="openPreview('')"></div>
-    <div class="stack-slot s2" onclick="openPreview('')"></div>
-    <div class="stack-slot s3" onclick="openPreview('')"></div>
-    <div class="expand-btn" onclick="toggleStack(this)">展开 3</div>
+<div class="groups">
+
+  <!-- 第1组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 01</div>
+    <div class="stack-box collapsed" data-group="1">
+      <div class="stack-slot g1-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g1-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g1-s3" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 1)">展开 3</button>
+    </div>
   </div>
+
+  <!-- 第2组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 02</div>
+    <div class="stack-box collapsed" data-group="2">
+      <div class="stack-slot g2-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g2-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g2-s3" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 2)">展开 3</button>
+    </div>
+  </div>
+
+  <!-- 第3组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 03</div>
+    <div class="stack-box collapsed" data-group="3">
+      <div class="stack-slot g3-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g3-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g3-s3" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 3)">展开 3</button>
+    </div>
+  </div>
+
+  <!-- 第4组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 04</div>
+    <div class="stack-box collapsed" data-group="4">
+      <div class="stack-slot g4-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g4-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g4-s3" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 4)">展开 3</button>
+    </div>
+  </div>
+
 </div>
 
+<!-- 全屏预览 -->
 <div class="preview" onclick="closePreview()">
   <img id="preview-img">
 </div>
@@ -47,31 +253,43 @@ body{background:#f5f5f7;color:#1d1d1f;}
 <script>
 const preview = document.querySelector('.preview');
 const previewImg = document.getElementById('preview-img');
-let isExpanded = false;
 
+// 每一组独立展开/收起
+function toggleStack(btn, groupId){
+  const box = document.querySelector(`.stack-box[data-group="${groupId}"]`);
+  const slots = box.querySelectorAll('.stack-slot');
+  const isCollapsed = box.classList.contains('collapsed');
+
+  if(isCollapsed){
+    slots.forEach((el, i)=>{
+      el.style.top = i * 110 + "px";
+    });
+    btn.innerText = "收起";
+    box.classList.remove('collapsed');
+  }else{
+    slots.forEach((el, i)=>{
+      el.style.top = ["0", "16px", "32px"][i];
+    });
+    btn.innerText = "展开 3";
+    box.classList.add('collapsed');
+  }
+}
+
+// 点击任意图片全屏放大
 function openPreview(src){
-  if(!src)return;
+  if(!src) return;
   previewImg.src = src;
   preview.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 }
+
+// 关闭大图
 function closePreview(){
   preview.classList.remove('active');
-  document.body.style.overflow = '';
-}
-function toggleStack(btn){
-  const slots = document.querySelectorAll('.stack-slot');
-  if(!isExpanded){
-    slots.forEach((el,i)=>{el.style.top = i*20 + 'px';});
-    btn.innerText = '收起';
-  }else{
-    slots[0].style.top = '0';
-    slots[1].style.top = '16px';
-    slots[2].style.top = '32px';
-    btn.innerText = '展开 3';
-  }
-  isExpanded = !isExpanded;
+  previewImg.src = "";
+  document.body.style.overflow = "";
 }
 </script>
+
 </body>
 </html>
