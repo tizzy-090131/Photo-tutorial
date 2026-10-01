@@ -1,142 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- 手机自适应 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>薄荷水的拍摄</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
-        }
-        body {
-            background-color: #f5f5f7;
-            color: #1d1d1f;
-            padding: 40px 20px;
-        }
-        /* 顶部标题栏 */
-        .header-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 48px;
-            letter-spacing: 0.5px;
-        }
-        /* 每组图片模块 */
-        .photo-group {
-            max-width: 600px;
-            margin: 0 auto 50px;
-        }
-        .group-name {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 18px;
-            color: #424245;
-        }
-        /* 叠放缩略图容器 */
-        .stack-wrap {
-            position: relative;
-            height: 320px;
-        }
-        .stack-img {
-            position: absolute;
-            width: 85%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            object-fit: cover;
-            height: 280px;
-        }
-        /* 叠层偏移，营造堆叠效果 */
-        .img-1 {top:0; z-index:3;}
-        .img-2 {top:16px; z-index:2;}
-        .img-3 {top:32px; z-index:1;}
-
-        .stack-img:active {
-            transform: translateX(-50%) scale(0.97);
-        }
-
-        /* 全屏预览弹窗（苹果风蒙版） */
-        .preview-modal {
-            position: fixed;
-            top:0;
-            left:0;
-            width:100vw;
-            height:100vh;
-            background: rgba(0,0,0,0.92);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            padding: 20px;
-        }
-        .preview-modal img {
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: 12px;
-        }
-        .preview-modal.active {
-            display: flex;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mint Water Photography</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;}
+body{background:#f5f5f7;color:#1d1d1f;}
+/* 顶满屏幕的英文标题 */
+.header-bar{width:100%;padding:20px 0;text-align:center;background:#ffcc00;}
+.header-title{font-size:32px;font-weight:600;letter-spacing:0.5px;}
+/* 微信风叠图容器 */
+.stack-area{max-width:600px;margin:30px auto;padding:0 20px;}
+.stack-box{position:relative;height:320px;}
+/* 占位图框，之后换你自己的图 */
+.stack-slot{position:absolute;width:85%;left:50%;transform:translateX(-50%);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,0.12);height:280px;background:#e8e8ed;cursor:pointer;transition:all 0.3s ease;}
+.s1{top:0;z-index:3;}
+.s2{top:16px;z-index:2;}
+.s3{top:32px;z-index:1;}
+/* 展开按钮 */
+.expand-btn{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:6px 12px;border-radius:12px;font-size:14px;cursor:pointer;}
+/* 全屏预览 */
+.preview{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:999;padding:20px;}
+.preview img{max-width:100%;max-height:90vh;border-radius:12px;}
+.preview.active{display:flex;}
+</style>
 </head>
 <body>
-    <h1 class="header-title">薄荷水的拍摄</h1>
+<div class="header-bar">
+  <div class="header-title">Mint Water Photography</div>
+</div>
 
-    <!-- 第1组 -->
-    <div class="photo-group">
-        <div class="group-name">静物直拍</div>
-        <div class="stack-wrap">
-            <img class="stack-img img-1" src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-2" src="https://images.unsplash.com/photo-1613479480241-729c40bb4d95?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-3" src="https://images.unsplash.com/photo-1590502593747-42a561065510?w=800" onclick="openPreview(this.src)">
-        </div>
-    </div>
+<div class="stack-area">
+  <div class="stack-box">
+    <div class="stack-slot s1" onclick="openPreview('')"></div>
+    <div class="stack-slot s2" onclick="openPreview('')"></div>
+    <div class="stack-slot s3" onclick="openPreview('')"></div>
+    <div class="expand-btn" onclick="toggleStack(this)">展开 3</div>
+  </div>
+</div>
 
-    <!-- 第2组 -->
-    <div class="photo-group">
-        <div class="group-name">光影侧拍</div>
-        <div class="stack-wrap">
-            <img class="stack-img img-1" src="https://images.unsplash.com/photo-1560023907-5f339617ea40?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-2" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-3" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800" onclick="openPreview(this.src)">
-        </div>
-    </div>
-
-    <!-- 第3组 -->
-    <div class="photo-group">
-        <div class="group-name">环境氛围感拍摄</div>
-        <div class="stack-wrap">
-            <img class="stack-img img-1" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-2" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800" onclick="openPreview(this.src)">
-            <img class="stack-img img-3" src="https://images.unsplash.com/photo-1546171753-97d7676e4602?w=800" onclick="openPreview(this.src)">
-        </div>
-    </div>
-
-    <!-- 全屏预览弹窗 -->
-    <div class="preview-modal" onclick="closePreview()">
-        <img id="preview-img">
-    </div>
+<div class="preview" onclick="closePreview()">
+  <img id="preview-img">
+</div>
 
 <script>
-    const modal = document.querySelector('.preview-modal');
-    const previewImg = document.getElementById('preview-img');
+const preview = document.querySelector('.preview');
+const previewImg = document.getElementById('preview-img');
+let isExpanded = false;
 
-    function openPreview(src){
-        previewImg.src = src;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closePreview(){
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+function openPreview(src){
+  if(!src)return;
+  previewImg.src = src;
+  preview.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePreview(){
+  preview.classList.remove('active');
+  document.body.style.overflow = '';
+}
+function toggleStack(btn){
+  const slots = document.querySelectorAll('.stack-slot');
+  if(!isExpanded){
+    slots.forEach((el,i)=>{el.style.top = i*20 + 'px';});
+    btn.innerText = '收起';
+  }else{
+    slots[0].style.top = '0';
+    slots[1].style.top = '16px';
+    slots[2].style.top = '32px';
+    btn.innerText = '展开 3';
+  }
+  isExpanded = !isExpanded;
+}
 </script>
 </body>
 </html>
