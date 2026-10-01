@@ -1,333 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mint Water Photography</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;
-}
-
-body{
-  background-image: url("pattern-bg.png");
-  background-repeat: repeat;
-  background-size: 300px;
-  background-color:#fff;
-  color:#1d1d1f;
-  position:relative;
-  overflow-x:hidden;
-  padding-bottom:80px;
-}
-
-/* 标题 */
-.page-header{
-  padding:28px 22px 18px;
-  position:relative;
-  z-index:1;
-}
-.page-title{
-  font-size:20px;
-  font-weight:500;
-  letter-spacing:0.3px;
-}
-
-/* 容器 */
-.groups{
-  max-width:640px;
-  margin:0 auto;
-  padding:0 20px;
-  position:relative;
-  z-index:1;
-}
-
-.photo-group{
-  margin-bottom:56px;
-}
-
-.group-name{
-  font-size:16px;
-  font-weight:500;
-  color:#424245;
-  margin:0 0 14px 4px;
-}
-
-.stack-box{
-  position:relative;
-  height:260px;
-}
-
-/* 叠图卡片 */
-.stack-slot{
-  position:absolute;
-  width:86%;
-  left:50%;
-  transform:translateX(-50%);
-  border-radius:20px;
-  box-shadow:0 10px 28px rgba(0,0,0,0.14);
-  height:220px;
-  background:#e8e8ed;
-  background-size:cover;
-  background-position:center;
-  cursor:pointer;
-  transition:top 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.g1-s1{top:0;   z-index:2;}
-.g1-s2{top:16px;z-index:1;}
-
-.g2-s1{top:0;   z-index:2;}
-.g2-s2{top:16px;z-index:1;}
-
-.g3-s1{top:0;   z-index:2;}
-.g3-s2{top:16px;z-index:1;}
-
-.g4-s1{top:0;   z-index:2;}
-.g4-s2{top:16px;z-index:1;}
-
-.g5-s1{top:0;   z-index:2;}
-.g5-s2{top:16px;z-index:1;}
-
-.g6-s1{top:0;   z-index:2;}
-.g6-s2{top:16px;z-index:1;}
-
-.g7-s1{top:0;   z-index:2;}
-.g7-s2{top:16px;z-index:1;}
-
-.g8-s1{top:0;   z-index:2;}
-.g8-s2{top:16px;z-index:1;}
-
-.g9-s1{top:0;   z-index:2;}
-.g9-s2{top:16px;z-index:1;}
-
-.g10-s1{top:0;   z-index:2;}
-.g10-s2{top:16px;z-index:1;}
-
-/* 展开按钮 */
-.expand-btn{
-  position:absolute;
-  bottom:-34px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#2c2c2e;
-  color:#fff;
-  padding:8px 16px;
-  border-radius:99px;
-  font-size:14px;
-  cursor:pointer;
-  border:none;
-  z-index:10;
-}
-
-/* 全屏预览 */
-.preview{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.93);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-  padding:20px;
-}
-.preview img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  border-radius:14px;
-}
-.preview.active{
-  display:flex;
-}
-
-/* 收起状态 */
-.stack-box.collapsed .g1-s1{top:0;}
-.stack-box.collapsed .g1-s2{top:16px;}
-
-.stack-box.collapsed .g2-s1{top:0;}
-.stack-box.collapsed .g2-s2{top:16px;}
-
-.stack-box.collapsed .g3-s1{top:0;}
-.stack-box.collapsed .g3-s2{top:16px;}
-
-.stack-box.collapsed .g4-s1{top:0;}
-.stack-box.collapsed .g4-s2{top:16px;}
-
-.stack-box.collapsed .g5-s1{top:0;}
-.stack-box.collapsed .g5-s2{top:16px;}
-
-.stack-box.collapsed .g6-s1{top:0;}
-.stack-box.collapsed .g6-s2{top:16px;}
-
-.stack-box.collapsed .g7-s1{top:0;}
-.stack-box.collapsed .g7-s2{top:16px;}
-
-.stack-box.collapsed .g8-s1{top:0;}
-.stack-box.collapsed .g8-s2{top:16px;}
-
-.stack-box.collapsed .g9-s1{top:0;}
-.stack-box.collapsed .g9-s2{top:16px;}
-
-.stack-box.collapsed .g10-s1{top:0;}
-.stack-box.collapsed .g10-s2{top:16px;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+body{background:#f7f7f7;padding:20px;max-width:800px;margin:0 auto;}
+h1{text-align:center;color:#222;margin-bottom:30px;font-size:24px;}
+.stack-box{background:#fff;border-radius:14px;padding:16px;margin-bottom:20px;box-shadow:0 2px 8px #00000012;}
+.stack-box h3{font-size:18px;color:#333;margin-bottom:12px;}
+.img-wrap{position:relative;height:320px;overflow:hidden;border-radius:10px;margin-bottom:12px;}
+.img-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.35s ease;}
+.img-wrap .img-top{opacity:0;}
+.img-wrap.active .img-top{opacity:1;}
+.expand-btn{width:100%;padding:10px;border:none;background:#3478f6;color:white;border-radius:8px;font-size:16px;cursor:pointer;}
 </style>
 </head>
 <body>
+<h1>Mint Water Photography</h1>
 
-<!-- 顶部英文标题 -->
-<div class="page-header">
-  <div class="page-title">Mint Water Photography</div>
+<div class="stack-box g1">
+  <h3>第1组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="01.jpg">
+    <img class="img-top" src="02.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
 </div>
 
-<div class="groups">
-
-  <!-- 第1组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 01</div>
-    <div class="stack-box collapsed" data-group="1">
-      <div class="stack-slot g1-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g1-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 1)">展开 2</button>
-    </div>
+<div class="stack-box g2">
+  <h3>第2组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="03.jpg">
+    <img class="img-top" src="04.jpg">
   </div>
-
-  <!-- 第2组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 02</div>
-    <div class="stack-box collapsed" data-group="2">
-      <div class="stack-slot g2-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g2-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 2)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第3组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 03</div>
-    <div class="stack-box collapsed" data-group="3">
-      <div class="stack-slot g3-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g3-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 3)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第4组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 04</div>
-    <div class="stack-box collapsed" data-group="4">
-      <div class="stack-slot g4-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g4-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 4)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第5组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 05</div>
-    <div class="stack-box collapsed" data-group="5">
-      <div class="stack-slot g5-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g5-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 5)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第6组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 06</div>
-    <div class="stack-box collapsed" data-group="6">
-      <div class="stack-slot g6-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g6-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 6)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第7组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 07</div>
-    <div class="stack-box collapsed" data-group="7">
-      <div class="stack-slot g7-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g7-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 7)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第8组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 08</div>
-    <div class="stack-box collapsed" data-group="8">
-      <div class="stack-slot g8-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g8-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 8)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第9组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 09</div>
-    <div class="stack-box collapsed" data-group="9">
-      <div class="stack-slot g9-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g9-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 9)">展开 2</button>
-    </div>
-  </div>
-
-  <!-- 第10组 -->
-  <div class="photo-group">
-    <div class="group-name">Collection 10</div>
-    <div class="stack-box collapsed" data-group="10">
-      <div class="stack-slot g10-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g10-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
-      <button class="expand-btn" onclick="toggleStack(this, 10)">展开 2</button>
-    </div>
-  </div>
-
+  <button class="expand-btn">展开2</button>
 </div>
 
-<!-- 全屏预览 -->
-<div class="preview" onclick="closePreview()">
-  <img id="preview-img">
+<div class="stack-box g3">
+  <h3>第3组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="05.jpg">
+    <img class="img-top" src="06.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g4">
+  <h3>第4组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="07.jpg">
+    <img class="img-top" src="08.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g5">
+  <h3>第5组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="09.jpg">
+    <img class="img-top" src="10.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g6">
+  <h3>第6组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="11.jpg">
+    <img class="img-top" src="12.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g7">
+  <h3>第7组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="13.jpg">
+    <img class="img-top" src="14.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g8">
+  <h3>第8组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="15.jpg">
+    <img class="img-top" src="16.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g9">
+  <h3>第9组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="17.jpg">
+    <img class="img-top" src="18.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g10">
+  <h3>第10组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="19.jpg">
+    <img class="img-top" src="20.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g11">
+  <h3>第11组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="21.jpg">
+    <img class="img-top" src="22.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g12">
+  <h3>第12组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="23.jpg">
+    <img class="img-top" src="24.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g13">
+  <h3>第13组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="25.jpg">
+    <img class="img-top" src="26.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g14">
+  <h3>第14组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="27.jpg">
+    <img class="img-top" src="28.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g15">
+  <h3>第15组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="29.jpg">
+    <img class="img-top" src="30.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g16">
+  <h3>第16组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="31.jpg">
+    <img class="img-top" src="32.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g17">
+  <h3>第17组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="33.jpg">
+    <img class="img-top" src="34.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g18">
+  <h3>第18组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="35.jpg">
+    <img class="img-top" src="36.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
+</div>
+
+<div class="stack-box g19">
+  <h3>第19组 拍摄技巧</h3>
+  <div class="img-wrap">
+    <img class="img-bottom" src="37.jpg">
+    <img class="img-top" src="38.jpg">
+  </div>
+  <button class="expand-btn">展开2</button>
 </div>
 
 <script>
-const preview = document.querySelector('.preview');
-const previewImg = document.getElementById('preview-img');
-
-function toggleStack(btn, groupId){
-  const box = document.querySelector(`.stack-box[data-group="${groupId}"]`);
-  const slots = box.querySelectorAll('.stack-slot');
-  const isCollapsed = box.classList.contains('collapsed');
-
-  if(isCollapsed){
-    slots.forEach((el, i)=>{
-      el.style.top = i * 110 + "px";
-    });
-    btn.innerText = "收起";
-    box.classList.remove('collapsed');
-  }else{
-    slots.forEach((el, i)=>{
-      el.style.top = ["0", "16px"][i];
-    });
-    btn.innerText = "展开 2";
-    box.classList.add('collapsed');
+const btns = document.querySelectorAll('.expand-btn');
+btns.forEach(btn=>{
+  btn.onclick = function(){
+    const wrap = this.previousElementSibling;
+    wrap.classList.toggle('active');
+    if(wrap.classList.contains('active')){
+      this.textContent = "收起";
+    }else{
+      this.textContent = "展开2";
+    }
   }
-}
-
-function openPreview(src){
-  if(!src) return;
-  previewImg.src = src;
-  preview.classList.add('active');
-  document.body.style.overflow = "hidden";
-}
-
-function closePreview(){
-  preview.classList.remove('active');
-  previewImg.src = "";
-  document.body.style.overflow = "";
-}
+})
 </script>
-
 </body>
 </html>
