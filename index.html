@@ -20,10 +20,10 @@ body{
   color:#1d1d1f;
   position:relative;
   overflow-x:hidden;
-  padding-bottom:60px;
+  padding-bottom:80px;
 }
 
-/* 标题：小字号、靠左 */
+/* 标题 */
 .page-header{
   padding:28px 22px 18px;
   position:relative;
@@ -35,7 +35,7 @@ body{
   letter-spacing:0.3px;
 }
 
-/* 多组叠图容器 */
+/* 容器 */
 .groups{
   max-width:640px;
   margin:0 auto;
@@ -60,7 +60,7 @@ body{
   height:260px;
 }
 
-/* 每张叠图卡片，每组2张 */
+/* 叠图卡片 */
 .stack-slot{
   position:absolute;
   width:86%;
@@ -87,6 +87,24 @@ body{
 
 .g4-s1{top:0;   z-index:2;}
 .g4-s2{top:16px;z-index:1;}
+
+.g5-s1{top:0;   z-index:2;}
+.g5-s2{top:16px;z-index:1;}
+
+.g6-s1{top:0;   z-index:2;}
+.g6-s2{top:16px;z-index:1;}
+
+.g7-s1{top:0;   z-index:2;}
+.g7-s2{top:16px;z-index:1;}
+
+.g8-s1{top:0;   z-index:2;}
+.g8-s2{top:16px;z-index:1;}
+
+.g9-s1{top:0;   z-index:2;}
+.g9-s2{top:16px;z-index:1;}
+
+.g10-s1{top:0;   z-index:2;}
+.g10-s2{top:16px;z-index:1;}
 
 /* 展开按钮 */
 .expand-btn{
@@ -125,7 +143,7 @@ body{
   display:flex;
 }
 
-/* 收起状态：恢复堆叠 */
+/* 收起状态 */
 .stack-box.collapsed .g1-s1{top:0;}
 .stack-box.collapsed .g1-s2{top:16px;}
 
@@ -137,6 +155,24 @@ body{
 
 .stack-box.collapsed .g4-s1{top:0;}
 .stack-box.collapsed .g4-s2{top:16px;}
+
+.stack-box.collapsed .g5-s1{top:0;}
+.stack-box.collapsed .g5-s2{top:16px;}
+
+.stack-box.collapsed .g6-s1{top:0;}
+.stack-box.collapsed .g6-s2{top:16px;}
+
+.stack-box.collapsed .g7-s1{top:0;}
+.stack-box.collapsed .g7-s2{top:16px;}
+
+.stack-box.collapsed .g8-s1{top:0;}
+.stack-box.collapsed .g8-s2{top:16px;}
+
+.stack-box.collapsed .g9-s1{top:0;}
+.stack-box.collapsed .g9-s2{top:16px;}
+
+.stack-box.collapsed .g10-s1{top:0;}
+.stack-box.collapsed .g10-s2{top:16px;}
 </style>
 </head>
 <body>
@@ -148,43 +184,103 @@ body{
 
 <div class="groups">
 
-  <!-- 第1组（2张图） -->
+  <!-- 第1组 -->
   <div class="photo-group">
     <div class="group-name">Collection 01</div>
     <div class="stack-box collapsed" data-group="1">
-      <div class="stack-slot g1-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g1-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g1-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g1-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
       <button class="expand-btn" onclick="toggleStack(this, 1)">展开 2</button>
     </div>
   </div>
 
-  <!-- 第2组（2张图） -->
+  <!-- 第2组 -->
   <div class="photo-group">
     <div class="group-name">Collection 02</div>
     <div class="stack-box collapsed" data-group="2">
-      <div class="stack-slot g2-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g2-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g2-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g2-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
       <button class="expand-btn" onclick="toggleStack(this, 2)">展开 2</button>
     </div>
   </div>
 
-  <!-- 第3组（2张图） -->
+  <!-- 第3组 -->
   <div class="photo-group">
     <div class="group-name">Collection 03</div>
     <div class="stack-box collapsed" data-group="3">
-      <div class="stack-slot g3-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g3-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g3-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g3-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
       <button class="expand-btn" onclick="toggleStack(this, 3)">展开 2</button>
     </div>
   </div>
 
-  <!-- 第4组（2张图） -->
+  <!-- 第4组 -->
   <div class="photo-group">
     <div class="group-name">Collection 04</div>
     <div class="stack-box collapsed" data-group="4">
-      <div class="stack-slot g4-s1" data-src="" onclick="openPreview(this.dataset.src)"></div>
-      <div class="stack-slot g4-s2" data-src="" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g4-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g4-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
       <button class="expand-btn" onclick="toggleStack(this, 4)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第5组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 05</div>
+    <div class="stack-box collapsed" data-group="5">
+      <div class="stack-slot g5-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g5-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 5)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第6组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 06</div>
+    <div class="stack-box collapsed" data-group="6">
+      <div class="stack-slot g6-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g6-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 6)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第7组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 07</div>
+    <div class="stack-box collapsed" data-group="7">
+      <div class="stack-slot g7-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g7-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 7)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第8组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 08</div>
+    <div class="stack-box collapsed" data-group="8">
+      <div class="stack-slot g8-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g8-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 8)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第9组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 09</div>
+    <div class="stack-box collapsed" data-group="9">
+      <div class="stack-slot g9-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g9-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 9)">展开 2</button>
+    </div>
+  </div>
+
+  <!-- 第10组 -->
+  <div class="photo-group">
+    <div class="group-name">Collection 10</div>
+    <div class="stack-box collapsed" data-group="10">
+      <div class="stack-slot g10-s1" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <div class="stack-slot g10-s2" data-src="https://aka.doubaocdn.com/s/eJx9cFmSzeT2R4p7R4p7R4p7" onclick="openPreview(this.dataset.src)"></div>
+      <button class="expand-btn" onclick="toggleStack(this, 10)">展开 2</button>
     </div>
   </div>
 
@@ -199,7 +295,6 @@ body{
 const preview = document.querySelector('.preview');
 const previewImg = document.getElementById('preview-img');
 
-// 每一组独立展开/收起，每组2张图片
 function toggleStack(btn, groupId){
   const box = document.querySelector(`.stack-box[data-group="${groupId}"]`);
   const slots = box.querySelectorAll('.stack-slot');
@@ -220,7 +315,6 @@ function toggleStack(btn, groupId){
   }
 }
 
-// 点击任意图片全屏放大
 function openPreview(src){
   if(!src) return;
   previewImg.src = src;
@@ -228,7 +322,6 @@ function openPreview(src){
   document.body.style.overflow = "hidden";
 }
 
-// 关闭大图
 function closePreview(){
   preview.classList.remove('active');
   previewImg.src = "";
