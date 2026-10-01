@@ -1,1 +1,84 @@
-<html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>摄影叠图教程</title> <style> *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif} body{background:#121212;color:#f0f0f0;max-width:750px;margin:0 auto;padding:24px 16px} h1{font-size:24px;font-weight:600;text-align:center;margin-bottom:32px;letter-spacing:1px} .img-box{background:#1e1e1e;border-radius:12px;padding:20px;margin-bottom:28px;display:flex;flex-direction:column;gap:16px} .img-placeholder{height:320px;background:#2a2a2a;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px} .step{font-size:16px;line-height:1.8;margin-bottom:16px;padding-left:12px;border-left:3px solid #44aaff} .tip{margin-top:32
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 手机自动适配屏幕 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机摄影叠图教程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0f0f11;
+            color: #eeeeee;
+            font-family: system-ui, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.7;
+            /* 页面淡入动画 */
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: #ffffff;
+        }
+        .img-wrap {
+            max-width: 700px;
+            margin: 0 auto 35px;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .img-wrap img {
+            width: 100%;
+            display: block;
+        }
+        .content-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1a1a1f;
+            padding: 28px;
+            border-radius: 14px;
+        }
+        .content-card h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #e0e8ff;
+        }
+        .step-item {
+            margin-bottom:14px;
+            font-size: 16px;
+        }
+        .footer-text{
+            text-align:center;
+            margin-top:36px;
+            opacity:0.65;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>手机摄影 · 叠图创意教程</h1>
+
+    <div class="img-wrap">
+        <img src="https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?w=800" alt="叠图摄影示例">
+    </div>
+
+    <div class="content-card">
+        <h2>📸 叠图拍摄4个步骤</h2>
+        <div class="step-item">① 固定手机！用三脚架或者支架，位置不能移动</div>
+        <div class="step-item">② 拍摄第一张背景图，保持相机不动</div>
+        <div class="step-item">③ 改变人物/物体位置，拍第二张</div>
+        <div class="step-item">④ 后期APP叠加两张图片，擦除多余部分完成效果</div>
+    </div>
+
+    <p class="footer-text">简单手机创意摄影教程</p>
+</body>
+</html>
