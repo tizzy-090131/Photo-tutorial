@@ -36,8 +36,7 @@ body.lock-scroll{overflow:hidden;}
   border:1px solid rgba(0,0,0,.06);
   border-radius:24px;
   box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  /* Safari优化：backdrop-filter只在浮层使用，卡片移除模糊提升速度 */
   padding:16px 14px 14px;
   cursor:pointer;
   transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s cubic-bezier(.22,1,.36,1);
@@ -66,6 +65,8 @@ body.lock-scroll{overflow:hidden;}
   transition:.4s cubic-bezier(.22,1,.36,1);
   box-shadow:0 8px 20px rgba(0,0,0,.1);
   will-change: transform;
+  /* Safari图层优化 */
+  -webkit-transform:translateZ(0);
 }
 /* ========== 普通2图卡片样式 ========== */
 .img-wrap.normal .img-1{position:absolute;top:0;left:0;z-index:2;transform:rotate(-2deg)}
@@ -84,6 +85,7 @@ body.lock-scroll{overflow:hidden;}
   position:absolute;
   top:0;
   left:0;
+  -webkit-transform:translateZ(0);
 }
 .img-wrap.four-stack .img-s1{z-index:4;transform:rotate(-2.5deg);}
 .img-wrap.four-stack .img-s2{z-index:3;transform:rotate(-0.8deg);}
@@ -142,7 +144,7 @@ body.lock-scroll{overflow:hidden;}
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   padding:24px 20px 22px;
 }
-.overlay-card:has(.img-wrap.open){
+.overlay-card.open-scroll{
   overflow-y:auto;
 }
 .overlay-card .group-title{font-size:16px;margin-bottom:20px}
@@ -150,7 +152,7 @@ body.lock-scroll{overflow:hidden;}
 /* 大图预览 */
 .lightbox{position:fixed;inset:0;background:rgba(22,22,23,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden}
 .lightbox.active{display:flex}
-.lightbox-img{max-width:90%;max-height:90%;border-radius:16px;transform-origin:center;cursor:grab}
+.lightbox-img{max-width:90%;max-height:90%;border-radius:16px;transform-origin:center;cursor:grab;-webkit-transform:translateZ(0);}
 .lightbox-img:active{cursor:grabbing}
 .lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .lightbox-close:hover{background:rgba(255,255,255,.24)}
@@ -469,7 +471,13 @@ function openCard(cardEl){
   toggleBtn.onclick = function(e){
     e.stopPropagation();
     imgWrap.classList.toggle('open');
-    this.innerText = imgWrap.classList.contains('open') ? '收起' : (imgWrap.classList.contains('four-stack') ? '展开4' : '展开2');
+    if(imgWrap.classList.contains('open')){
+      wrap.classList.add('open-scroll');
+      this.innerText = '收起';
+    }else{
+      wrap.classList.remove('open-scroll');
+      this.innerText = imgWrap.classList.contains('four-stack') ? '展开4' : '展开2';
+    }
   }
   wrap.querySelectorAll('.img-wrap img').forEach(img=>{
     img.onclick = function(e){
