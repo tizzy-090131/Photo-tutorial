@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mint Water Photography</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;}
 body{
     background:url("pattern-bg.png") center/420px auto repeat;
     min-height:100vh;
@@ -19,15 +19,15 @@ body.lock-scroll{overflow:hidden;}
     font-size:clamp(28px,5vw,48px);
     font-weight:700;
     letter-spacing:-0.02em;
-    color:rgba(118, 240, 192, 0.9); /*更浅薄荷色 + 透明度0.9*/
+    color:rgba(118, 240, 192, 0.9);
     text-shadow:0 2px 12px rgba(0,0,0,0.2);
 }
 .page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
 
 .gallery{
   display:grid;
-  grid-template-columns:repeat(2,1fr); /*桌面：一行2组*/
-  gap:36px; /*组之间空隙加大*/
+  grid-template-columns:repeat(2,1fr);
+  gap:36px;
   max-width:1200px;
   margin:0 auto;
 }
@@ -40,7 +40,8 @@ body.lock-scroll{overflow:hidden;}
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   padding:16px 14px 14px;
   cursor:pointer;
-  transition: all 0.4s cubic-bezier(.22,1,.36,1);
+  transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s cubic-bezier(.22,1,.36,1);
+  will-change: transform, opacity;
 }
 .apple-card.hidden{
   opacity:0;
@@ -55,7 +56,7 @@ body.lock-scroll{overflow:hidden;}
   width:100%;
   aspect-ratio:390/569;
   margin-bottom:10px;
-  overflow:hidden; /*图片限制在卡片内部，不会溢出*/
+  overflow:hidden;
 }
 .img-wrap img{
   width:100%;
@@ -64,6 +65,7 @@ body.lock-scroll{overflow:hidden;}
   cursor:pointer;
   transition:.4s cubic-bezier(.22,1,.36,1);
   box-shadow:0 8px 20px rgba(0,0,0,.1);
+  will-change: transform;
 }
 /* ========== 普通2图卡片样式 ========== */
 .img-wrap.normal .img-1{position:absolute;top:0;left:0;z-index:2;transform:rotate(-2deg)}
@@ -77,31 +79,27 @@ body.lock-scroll{overflow:hidden;}
 }
 .img-wrap.normal.open .img-1{margin-bottom:14px}
 
-/* ========== 第24组专用：4张图片网格样式 ========== */
-.img-wrap.four-pic .grid-box{
-  width:100%;
-  height:100%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:6px;
+/* ========== 第24组：4张图片 堆叠样式（收起叠一起，展开垂直排列） ========== */
+.img-wrap.four-stack img{
+  position:absolute;
+  top:0;
+  left:0;
 }
-.img-wrap.four-pic .grid-box img{
-  border-radius:10px;
-  transform:rotate(-1deg);
-}
-.img-wrap.four-pic.open{
+.img-wrap.four-stack .img-s1{z-index:4;transform:rotate(-2.5deg);}
+.img-wrap.four-stack .img-s2{z-index:3;transform:rotate(-0.8deg);}
+.img-wrap.four-stack .img-s3{z-index:2;transform:rotate(1deg);}
+.img-wrap.four-stack .img-s4{z-index:1;transform:rotate(2.5deg);}
+
+.img-wrap.four-stack.open{
   aspect-ratio:auto;
   overflow:visible;
 }
-.img-wrap.four-pic.open .grid-box{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-.img-wrap.four-pic.open .grid-box img{
+.img-wrap.four-stack.open img{
+  position:static;
   transform:rotate(0deg);
+  margin-bottom:14px;
 }
+.img-wrap.four-stack.open img:last-child{margin-bottom:0;}
 
 .toggle-btn{
     position:absolute;
@@ -115,7 +113,8 @@ body.lock-scroll{overflow:hidden;}
     color:#fff;
     font-size:14px;
     cursor:pointer;
-    transition:.2s
+    transition:.2s;
+    will-change:background;
 }
 .toggle-btn:hover{background:rgba(0,0,0,.7)}
 
@@ -177,7 +176,7 @@ body.lock-scroll{overflow:hidden;}
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">海边拍照</h2>
 <div class="img-wrap normal">
-<img class="img-1" src="012.jpg" onclick="openLightbox(this.src)">
+<img class="img-1" src="01 (2).jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="02 (2).jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开2</button>
 </div>
@@ -350,16 +349,14 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<!-- ====================== 第24组（4张图片）====================== -->
+<!-- ====================== 第24组（4张堆叠图）====================== -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
-<div class="img-wrap four-pic">
-<div class="grid-box">
-<img src="51.jpg" onclick="openLightbox(this.src)">
-<img src="52.jpg" onclick="openLightbox(this.src)">
-<img src="53.jpg" onclick="openLightbox(this.src)">
-<img src="54.jpg" onclick="openLightbox(this.src)">
-</div>
+<div class="img-wrap four-stack">
+<img class="img-s1" src="51.jpg" onclick="openLightbox(this.src)">
+<img class="img-s2" src="52.jpg" onclick="openLightbox(this.src)">
+<img class="img-s3" src="53.jpg" onclick="openLightbox(this.src)">
+<img class="img-s4" src="54.jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开4</button>
 </div>
 </section>
@@ -469,7 +466,7 @@ function openCard(cardEl){
   toggleBtn.onclick = function(e){
     e.stopPropagation();
     imgWrap.classList.toggle('open');
-    this.innerText = imgWrap.classList.contains('open') ? '收起' : (imgWrap.classList.contains('four-pic') ? '展开4' : '展开2');
+    this.innerText = imgWrap.classList.contains('open') ? '收起' : (imgWrap.classList.contains('four-stack') ? '展开4' : '展开2');
   }
   wrap.querySelectorAll('.img-wrap img').forEach(img=>{
     img.onclick = function(e){
@@ -494,7 +491,7 @@ document.querySelectorAll('.gallery .toggle-btn').forEach(btn=>{
     e.stopPropagation();
     const wrap = this.parentElement;
     wrap.classList.toggle('open');
-    this.innerText = wrap.classList.contains('open') ? '收起' : (wrap.classList.contains('four-pic') ? '展开4' : '展开2');
+    this.innerText = wrap.classList.contains('open') ? '收起' : (wrap.classList.contains('four-stack') ? '展开4' : '展开2');
   }
 })
 
