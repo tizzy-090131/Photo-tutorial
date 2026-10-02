@@ -12,24 +12,19 @@ body{
     padding:56px 20px;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;
     color:#1d1d1f;
-    transition: overflow 0.3s;
 }
-/* 选中卡片后，页面背景锁定，不能滚动 */
-body.lock-scroll{
-    overflow:hidden;
-}
+body.lock-scroll{overflow:hidden;}
 .page-header{text-align:center;margin-bottom:48px}
 .page-title{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-0.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
 .page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
 
-/* 默认：一行4个迷你卡片 */
+/* 首页网格：一行4个迷你卡片 */
 .gallery{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:24px;
   max-width:1200px;
   margin:0 auto;
-  position:relative;
 }
 .apple-card{
   background:rgba(255,255,255,.72);
@@ -42,31 +37,13 @@ body.lock-scroll{
   cursor:pointer;
   transition: all 0.4s cubic-bezier(.22,1,.36,1);
 }
-/* 选中卡片：放到屏幕居中容器，不再用fixed写在卡片上，解决内部滚动bug */
-.apple-card.selected{
-  width:min(420px,90vw);
-  padding:24px 20px 22px;
-}
 .apple-card.hidden{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
   transform:scale(0.75);
 }
-/* 居中浮层容器，选中卡片放在这里 */
-.card-overlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:90;
-}
-.card-overlay.active{
-  display:flex;
-}
 .group-title{font-size:14px;font-weight:600;text-align:center;margin-bottom:12px}
-.apple-card.selected .group-title{font-size:16px;margin-bottom:20px}
 
 .img-wrap{
   position:relative;
@@ -74,12 +51,8 @@ body.lock-scroll{
   aspect-ratio:390/569;
   margin-bottom:10px;
 }
-.apple-card.selected .img-wrap{
-  margin-bottom:16px;
-}
 .img-wrap img{
   width:100%;
-  height:100%;
   border-radius:16px;
   object-fit:cover;
   cursor:pointer;
@@ -88,10 +61,16 @@ body.lock-scroll{
 }
 .img-wrap .img-1{position:absolute;top:0;left:0;z-index:2;transform:rotate(-2deg)}
 .img-wrap .img-2{position:absolute;top:0;left:0;z-index:1;transform:rotate(2deg)}
-.img-wrap.open .img-1,.img-wrap.open .img-2{position:static;transform:rotate(0)}
+/* 展开后，图片变成垂直排列，容器高度自动变长，支持滚动 */
+.img-wrap.open{
+  aspect-ratio:auto;
+}
+.img-wrap.open .img-1,.img-wrap.open .img-2{
+  position:static;
+  transform:rotate(0);
+}
 .img-wrap.open .img-1{margin-bottom:14px}
 
-/*胶囊按钮，图片外侧，不会被遮挡 */
 .toggle-btn{
     position:absolute;
     right:-8px;
@@ -108,7 +87,34 @@ body.lock-scroll{
 }
 .toggle-btn:hover{background:rgba(0,0,0,.7)}
 
-/*图片预览弹窗*/
+/* 居中浮层 */
+.card-overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.25);
+  z-index:90;
+  padding:20px;
+}
+.card-overlay.active{display:flex;}
+/* 浮层内卡片容器：最大高度限制，超出可以上下滚动！重点！ */
+.overlay-card{
+  width:min(520px,90vw);
+  max-height:85vh;
+  overflow-y:auto;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:24px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  padding:24px 20px 22px;
+}
+.overlay-card .group-title{font-size:16px;margin-bottom:20px}
+
+/* 大图预览 */
 .lightbox{position:fixed;inset:0;background:rgba(22,22,23,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden}
 .lightbox.active{display:flex}
 .lightbox-img{max-width:90%;max-height:90%;border-radius:16px;transform-origin:center;cursor:grab}
@@ -116,7 +122,6 @@ body.lock-scroll{
 .lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .lightbox-close:hover{background:rgba(255,255,255,.24)}
 
-/*响应式：平板一行2个；手机一行1个*/
 @media (max-width:900px){
   .gallery{grid-template-columns:repeat(2,1fr);}
 }
@@ -131,7 +136,7 @@ body.lock-scroll{
 <body>
 <header class="page-header">
 <h1 class="page-title">Mint Water Photography</h1>
-<p class="page-sub">首页一行4个迷你卡片｜点击卡片居中浮层｜背景锁定不滚动｜堆叠图片可正常展开</p>
+<p class="page-sub">首页一行4个卡片｜点开居中浮层｜展开长图可上下滚动｜背景锁定</p>
 </header>
 <main class="gallery">
 <section class="apple-card" onclick="openCard(this)">
@@ -288,7 +293,6 @@ body.lock-scroll{
 </section>
 </main>
 
-<!-- 新增：卡片居中浮层容器 -->
 <div class="card-overlay" id="cardOverlay" onclick="closeCard()">
   <div id="overlayContent"></div>
 </div>
@@ -302,27 +306,32 @@ body.lock-scroll{
 const overlay = document.getElementById('cardOverlay');
 const overlayContent = document.getElementById('overlayContent');
 
-// 打开卡片，放入浮层，背景锁定
 function openCard(cardEl){
-  // 复制卡片DOM放到浮层里面
-  overlayContent.innerHTML = cardEl.outerHTML;
+  overlayContent.innerHTML = '';
+  // 创建浮层内卡片，带滚动
+  const wrap = document.createElement('div');
+  wrap.className = 'overlay-card';
+  wrap.innerHTML = cardEl.innerHTML;
+  overlayContent.appendChild(wrap);
   overlay.classList.add('active');
-  // 其余卡片隐藏
+
+  // 首页卡片全部隐藏
   document.querySelectorAll('.gallery .apple-card').forEach(card=>{
     card.classList.add('hidden');
   })
-  // 锁定页面滚动（背景固定不动）
+  // 锁定页面背景滚动
   document.body.classList.add('lock-scroll');
 
-  // 重新绑定浮层内【展开按钮】事件（复制后的dom需要重新绑定，修复bug）
-  overlayContent.querySelector('.toggle-btn').onclick = function(e){
+  // 浮层内展开按钮
+  const toggleBtn = wrap.querySelector('.toggle-btn');
+  toggleBtn.onclick = function(e){
     e.stopPropagation();
-    const wrap=this.parentElement;
-    wrap.classList.toggle('open');
-    this.innerText=wrap.classList.contains('open')?'收起':'展开2';
+    const imgWrap = this.parentElement;
+    imgWrap.classList.toggle('open');
+    this.innerText = imgWrap.classList.contains('open') ? '收起' : '展开2';
   }
-  // 重新绑定浮层内图片点击预览
-  overlayContent.querySelectorAll('.img-wrap img').forEach(img=>{
+  // 浮层图片点击预览
+  wrap.querySelectorAll('.img-wrap img').forEach(img=>{
     img.onclick = function(e){
       e.stopPropagation();
       openLightbox(this.src);
@@ -330,7 +339,6 @@ function openCard(cardEl){
   })
 }
 
-// 关闭卡片浮层，恢复网格，解锁滚动
 function closeCard(){
   overlay.classList.remove('active');
   overlayContent.innerHTML = '';
@@ -340,7 +348,7 @@ function closeCard(){
   document.body.classList.remove('lock-scroll');
 }
 
-// 首页卡片展开按钮逻辑
+// 首页卡片展开按钮
 document.querySelectorAll('.gallery .toggle-btn').forEach(btn=>{
 btn.onclick=function(e){
 e.stopPropagation();
@@ -350,7 +358,7 @@ this.innerText=wrap.classList.contains('open')?'收起':'展开2';
 }
 })
 
-// 图片全屏预览
+// 大图预览拖拽缩放
 const lightbox=document.getElementById('lightbox');
 const lightboxImg=document.getElementById('lightboxImg');
 let scale=1,posX=0,posY=0,isDrag=false,startX,startY;
