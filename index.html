@@ -7,166 +7,80 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;}
 body{
-    background:url("pattern-bg.png") center/420px auto repeat;
+    background:url("pattern-bg.png") center/420px repeat;
     min-height:100vh;
     padding:56px 20px;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,PingFang SC,sans-serif;
     color:#1d1d1f;
 }
 body.lock-scroll{overflow:hidden;}
 .page-header{text-align:center;margin-bottom:48px}
-.page-title{
-    font-size:clamp(28px,5vw,48px);
-    font-weight:700;
-    letter-spacing:-0.02em;
-    color:rgba(118, 240, 192, 0.9);
-    text-shadow:0 2px 12px rgba(0,0,0,0.2);
-}
+.page-title{font-size:clamp(28px,5vw,48px);font-weight:700;color:rgba(118,240,192,0.9);text-shadow:0 2px 12px rgba(0,0,0,0.2);}
 .page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
 
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:36px;
-  max-width:1200px;
-  margin:0 auto;
-}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;max-width:1200px;margin:0 auto;}
 .apple-card{
   background:rgba(255,255,255,.72);
   border:1px solid rgba(0,0,0,.06);
   border-radius:24px;
-  box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);
-  /* Safari优化：backdrop-filter只在浮层使用，卡片移除模糊提升速度 */
   padding:16px 14px 14px;
   cursor:pointer;
-  transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s cubic-bezier(.22,1,.36,1);
-  will-change: transform, opacity;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .4s;
+  will-change:transform,opacity;
 }
-.apple-card.hidden{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transform:scale(0.75);
-}
+.apple-card.hidden{opacity:0;visibility:hidden;pointer-events:none;transform:scale(.75);}
 .group-title{font-size:14px;font-weight:600;text-align:center;margin-bottom:12px}
 
-.img-wrap{
-  position:relative;
-  width:100%;
-  aspect-ratio:390/569;
-  margin-bottom:10px;
-  overflow:hidden;
-}
+.img-wrap{position:relative;width:100%;aspect-ratio:390/569;margin-bottom:10px;overflow:hidden;}
 .img-wrap img{
-  width:100%;
-  border-radius:16px;
-  object-fit:cover;
-  cursor:pointer;
+  width:100%;border-radius:16px;object-fit:cover;cursor:pointer;
   transition:.4s cubic-bezier(.22,1,.36,1);
-  box-shadow:0 8px 20px rgba(0,0,0,.1);
-  will-change: transform;
-  /* Safari图层优化 */
-  -webkit-transform:translateZ(0);
+  -webkit-transform:translateZ(0);will-change:transform;
 }
-/* ========== 普通2图卡片样式 ========== */
 .img-wrap.normal .img-1{position:absolute;top:0;left:0;z-index:2;transform:rotate(-2deg)}
 .img-wrap.normal .img-2{position:absolute;top:0;left:0;z-index:1;transform:rotate(2deg)}
-.img-wrap.normal.open{
-  aspect-ratio:auto;
-}
-.img-wrap.normal.open .img-1,.img-wrap.normal.open .img-2{
-  position:static;
-  transform:rotate(0);
-}
+.img-wrap.normal.open{aspect-ratio:auto;}
+.img-wrap.normal.open img{position:static;transform:rotate(0);}
 .img-wrap.normal.open .img-1{margin-bottom:14px}
 
-/* ========== 第24组：4张图片 堆叠样式（收起叠一起，展开垂直排列） ========== */
-.img-wrap.four-stack img{
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-transform:translateZ(0);
-}
-.img-wrap.four-stack .img-s1{z-index:4;transform:rotate(-2.5deg);}
-.img-wrap.four-stack .img-s2{z-index:3;transform:rotate(-0.8deg);}
-.img-wrap.four-stack .img-s3{z-index:2;transform:rotate(1deg);}
-.img-wrap.four-stack .img-s4{z-index:1;transform:rotate(2.5deg);}
-
-.img-wrap.four-stack.open{
-  aspect-ratio:auto;
-  overflow:visible;
-}
-.img-wrap.four-stack.open img{
-  position:static;
-  transform:rotate(0deg);
-  margin-bottom:14px;
-}
+.img-wrap.four-stack img{position:absolute;top:0;left:0;-webkit-transform:translateZ(0);}
+.img-wrap.four-stack .img-s1{z-index:4;transform:rotate(-2.5deg)}
+.img-wrap.four-stack .img-s2{z-index:3;transform:rotate(-.8deg)}
+.img-wrap.four-stack .img-s3{z-index:2;transform:rotate(1deg)}
+.img-wrap.four-stack .img-s4{z-index:1;transform:rotate(2.5deg)}
+.img-wrap.four-stack.open{aspect-ratio:auto;overflow:visible;}
+.img-wrap.four-stack.open img{position:static;transform:rotate(0);margin-bottom:14px}
 .img-wrap.four-stack.open img:last-child{margin-bottom:0;}
 
 .toggle-btn{
-    position:absolute;
-    right:-8px;
-    top:12px;
-    z-index:999;
-    padding:6px 12px;
-    border:none;
-    border-radius:99px;
-    background:rgba(0,0,0,.55);
-    color:#fff;
-    font-size:14px;
-    cursor:pointer;
-    transition:.2s;
-    will-change:background;
+    position:absolute;right:-8px;top:12px;z-index:999;
+    padding:6px 12px;border:none;border-radius:99px;
+    background:rgba(0,0,0,.55);color:#fff;font-size:14px;cursor:pointer;
 }
-.toggle-btn:hover{background:rgba(0,0,0,.7)}
-
-.card-overlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,0.25);
-  z-index:90;
-  padding:20px;
-}
+.card-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.25);z-index:90;padding:20px;}
 .card-overlay.active{display:flex;}
 .overlay-card{
-  width:min(520px,90vw);
-  height:fit-content;
-  max-height:85vh;
-  overflow-y:hidden;
-  background:rgba(255,255,255,.72);
-  border:1px solid rgba(0,0,0,.06);
-  border-radius:24px;
-  box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  width:min(520px,90vw);max-height:85vh;overflow-y:hidden;
+  background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.06);border-radius:24px;
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
   padding:24px 20px 22px;
 }
-.overlay-card.open-scroll{
-  overflow-y:auto;
-}
+.overlay-card.open-scroll{overflow-y:auto;}
 .overlay-card .group-title{font-size:16px;margin-bottom:20px}
 
-/* 大图预览 */
 .lightbox{position:fixed;inset:0;background:rgba(22,22,23,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden}
 .lightbox.active{display:flex}
-.lightbox-img{max-width:90%;max-height:90%;border-radius:16px;transform-origin:center;cursor:grab;-webkit-transform:translateZ(0);}
+.lightbox-img{max-width:90%;max-height:90%;border-radius:16px;transform-origin:center;-webkit-transform:translateZ(0);cursor:grab;}
 .lightbox-img:active{cursor:grabbing}
-.lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-.lightbox-close:hover{background:rgba(255,255,255,.24)}
+.lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;}
 
-/* 手机端：依旧保持2列，只有特别小屏幕才变回1列 */
 @media (max-width:520px){
   .gallery{grid-template-columns:repeat(2,1fr);gap:24px;}
   body{padding:36px 14px}
   .apple-card{padding:14px 12px 12px}
   .toggle-btn{right:-4px;top:8px}
 }
-@media (max-width:360px){
-  .gallery{grid-template-columns:1fr;gap:30px}
-}
+@media (max-width:360px){.gallery{grid-template-columns:1fr;gap:30px}}
 </style>
 </head>
 <body>
@@ -351,7 +265,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<!-- ====================== 第24组（4张堆叠图）====================== -->
+<!-- 4张堆叠组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap four-stack">
@@ -362,7 +276,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开4</button>
 </div>
 </section>
-<!-- ============================================================== -->
+
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -460,29 +374,26 @@ function openCard(cardEl){
   wrap.innerHTML = cardEl.innerHTML;
   overlayContent.appendChild(wrap);
   overlay.classList.add('active');
-
-  document.querySelectorAll('.gallery .apple-card').forEach(card=>{
-    card.classList.add('hidden');
-  })
+  document.querySelectorAll('.apple-card').forEach(card=>card.classList.add('hidden'));
   document.body.classList.add('lock-scroll');
 
   const toggleBtn = wrap.querySelector('.toggle-btn');
   const imgWrap = toggleBtn.parentElement;
-  toggleBtn.onclick = function(e){
+  toggleBtn.onclick = e=>{
     e.stopPropagation();
     imgWrap.classList.toggle('open');
     if(imgWrap.classList.contains('open')){
       wrap.classList.add('open-scroll');
-      this.innerText = '收起';
+      toggleBtn.innerText = '收起';
     }else{
       wrap.classList.remove('open-scroll');
-      this.innerText = imgWrap.classList.contains('four-stack') ? '展开4' : '展开2';
+      toggleBtn.innerText = imgWrap.classList.contains('four-stack') ? '展开4' : '展开2';
     }
   }
   wrap.querySelectorAll('.img-wrap img').forEach(img=>{
-    img.onclick = function(e){
+    img.onclick = e=>{
       e.stopPropagation();
-      openLightbox(this.src);
+      openLightbox(img.src);
     }
   })
 }
@@ -490,71 +401,61 @@ function openCard(cardEl){
 function closeCard(){
   overlay.classList.remove('active');
   overlayContent.innerHTML = '';
-  document.querySelectorAll('.gallery .apple-card').forEach(card=>{
-    card.classList.remove('hidden');
-  })
+  document.querySelectorAll('.apple-card').forEach(card=>card.classList.remove('hidden'));
   document.body.classList.remove('lock-scroll');
 }
 
-// 首页卡片展开按钮
 document.querySelectorAll('.gallery .toggle-btn').forEach(btn=>{
-  btn.onclick = function(e){
+  btn.onclick = e=>{
     e.stopPropagation();
-    const wrap = this.parentElement;
+    const wrap = btn.parentElement;
     wrap.classList.toggle('open');
-    this.innerText = wrap.classList.contains('open') ? '收起' : (wrap.classList.contains('four-stack') ? '展开4' : '展开2');
+    btn.innerText = wrap.classList.contains('open') ? '收起' : (wrap.classList.contains('four-stack') ? '展开4' : '展开2');
   }
 })
 
-// 大图预览功能
 function openLightbox(src){
-scale=1;posX=0;posY=0;
-lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
-lightboxImg.src=src;
-lightbox.classList.add('active');
-document.body.style.overflow='hidden';
+  scale=1;posX=0;posY=0;
+  lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
+  lightboxImg.src=src;
+  lightbox.classList.add('active');
+  document.body.style.overflow='hidden';
 }
 function closeLightbox(){
-lightbox.classList.remove('active');
-lightboxImg.src='';
-document.body.style.overflow='';
+  lightbox.classList.remove('active');
+  lightboxImg.src='';
+  document.body.style.overflow='';
 }
 lightboxImg.addEventListener('wheel',e=>{
-e.preventDefault();
-const delta=e.deltaY<0 ? 0.12 : -0.12;
-scale=Math.max(0.4,Math.min(scale+delta,4));
-lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
+  e.preventDefault();
+  const delta=e.deltaY<0 ? 0.12 : -0.12;
+  scale=Math.max(0.4,Math.min(scale+delta,4));
+  lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
 })
 lightboxImg.addEventListener('mousedown',e=>{isDrag=true;startX=e.clientX-posX;startY=e.clientY-posY})
 document.addEventListener('mousemove',e=>{
-if(!isDrag) return;
-posX=e.clientX-startX;posY=e.clientY-startY;
-lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
+  if(!isDrag) return;
+  posX=e.clientX-startX;posY=e.clientY-startY;
+  lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
 })
 document.addEventListener('mouseup',()=>isDrag=false)
 
 lightboxImg.addEventListener('touchstart',e=>{
-if(e.touches.length===2){touchDist=Math.hypot(e.touches[0].pageX-e.touches[1].pageX,e.touches[0].pageY-e.touches[1].pageY)}
+  if(e.touches.length===2) touchDist=Math.hypot(e.touches[0].pageX-e.touches[1].pageX,e.touches[0].pageY-e.touches[1].pageY);
 })
 lightboxImg.addEventListener('touchmove',e=>{
-if(e.touches.length===2){
-e.preventDefault();
-const dist=Math.hypot(e.touches[0].pageX-e.touches[1].pageX,e.touches[0].pageY-e.touches[1].pageY);
-scale=Math.max(0.4,Math.min(scale*(dist/touchDist),4));
-touchDist=dist;
-lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
-}else if(e.touches.length===1&&!isDrag){
-isDrag=true;startX=e.touches[0].pageX-posX;startY=e.touches[0].pageY-posY;
-}
-})
-lightboxImg.addEventListener('touchend',()=>isDrag=false)
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    closeLightbox();
-    closeCard();
+  if(e.touches.length===2){
+    e.preventDefault();
+    const dist=Math.hypot(e.touches[0].pageX-e.touches[1].pageX,e.touches[0].pageY-e.touches[1].pageY);
+    scale=Math.max(0.4,Math.min(scale*(dist/touchDist),4));
+    lightboxImg.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
+  }else if(e.touches.length===1&&!isDrag){
+    isDrag=true;startX=e.touches[0].pageX-posX;startY=e.touches[0].pageY-posY;
   }
 })
-lightbox.onclick=e=>{if(e.target===lightbox)closeLightbox()}
+lightboxImg.addEventListener('touchend',()=>isDrag=false)
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();closeCard();}})
+lightbox.onclick=e=>{if(e.target===lightbox) closeLightbox();}
 </script>
 </body>
 </html>
