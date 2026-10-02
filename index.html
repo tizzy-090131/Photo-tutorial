@@ -6,7 +6,18 @@
 <title>Mint Water Photography</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
-body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;padding:56px 20px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;color:#1d1d1f}
+body{
+    background:url("pattern-bg.png") center/420px auto repeat;
+    min-height:100vh;
+    padding:56px 20px;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;
+    color:#1d1d1f;
+    transition: overflow 0.3s;
+}
+/* 选中卡片后，页面背景锁定，不能滚动 */
+body.lock-scroll{
+    overflow:hidden;
+}
 .page-header{text-align:center;margin-bottom:48px}
 .page-title{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-0.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
 .page-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-top:8px}
@@ -31,14 +42,9 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
   cursor:pointer;
   transition: all 0.4s cubic-bezier(.22,1,.36,1);
 }
-/* 选中状态：卡片放大到屏幕居中；其余卡片隐藏 */
+/* 选中卡片：放到屏幕居中容器，不再用fixed写在卡片上，解决内部滚动bug */
 .apple-card.selected{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
   width:min(420px,90vw);
-  z-index:100;
   padding:24px 20px 22px;
 }
 .apple-card.hidden{
@@ -46,6 +52,18 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
   visibility:hidden;
   pointer-events:none;
   transform:scale(0.75);
+}
+/* 居中浮层容器，选中卡片放在这里 */
+.card-overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:90;
+}
+.card-overlay.active{
+  display:flex;
 }
 .group-title{font-size:14px;font-weight:600;text-align:center;margin-bottom:12px}
 .apple-card.selected .group-title{font-size:16px;margin-bottom:20px}
@@ -113,10 +131,10 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <body>
 <header class="page-header">
 <h1 class="page-title">Mint Water Photography</h1>
-<p class="page-sub">首页一行4个迷你卡片｜点击卡片放大居中｜其余卡片隐藏｜堆叠图片+图片缩放</p>
+<p class="page-sub">首页一行4个迷你卡片｜点击卡片居中浮层｜背景锁定不滚动｜堆叠图片可正常展开</p>
 </header>
 <main class="gallery">
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第1组</h2>
 <div class="img-wrap">
 <img class="img-1" src="012.jpg" onclick="openLightbox(this.src)">
@@ -124,7 +142,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第2组</h2>
 <div class="img-wrap">
 <img class="img-1" src="03.jpg" onclick="openLightbox(this.src)">
@@ -132,7 +150,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第3组</h2>
 <div class="img-wrap">
 <img class="img-1" src="05.jpg" onclick="openLightbox(this.src)">
@@ -140,7 +158,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第4组</h2>
 <div class="img-wrap">
 <img class="img-1" src="07.jpg" onclick="openLightbox(this.src)">
@@ -148,7 +166,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第5组</h2>
 <div class="img-wrap">
 <img class="img-1" src="09.jpg" onclick="openLightbox(this.src)">
@@ -156,7 +174,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第6组</h2>
 <div class="img-wrap">
 <img class="img-1" src="11.jpg" onclick="openLightbox(this.src)">
@@ -164,7 +182,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第7组</h2>
 <div class="img-wrap">
 <img class="img-1" src="13.jpg" onclick="openLightbox(this.src)">
@@ -172,7 +190,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第8组</h2>
 <div class="img-wrap">
 <img class="img-1" src="15.jpg" onclick="openLightbox(this.src)">
@@ -180,7 +198,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第9组</h2>
 <div class="img-wrap">
 <img class="img-1" src="17.jpg" onclick="openLightbox(this.src)">
@@ -188,7 +206,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第10组</h2>
 <div class="img-wrap">
 <img class="img-1" src="19.jpg" onclick="openLightbox(this.src)">
@@ -196,7 +214,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第11组</h2>
 <div class="img-wrap">
 <img class="img-1" src="21.jpg" onclick="openLightbox(this.src)">
@@ -204,7 +222,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第12组</h2>
 <div class="img-wrap">
 <img class="img-1" src="23.jpg" onclick="openLightbox(this.src)">
@@ -212,7 +230,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第13组</h2>
 <div class="img-wrap">
 <img class="img-1" src="25.jpg" onclick="openLightbox(this.src)">
@@ -220,7 +238,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第14组</h2>
 <div class="img-wrap">
 <img class="img-1" src="27.jpg" onclick="openLightbox(this.src)">
@@ -228,7 +246,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第15组</h2>
 <div class="img-wrap">
 <img class="img-1" src="29.jpg" onclick="openLightbox(this.src)">
@@ -236,7 +254,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第16组</h2>
 <div class="img-wrap">
 <img class="img-1" src="31.jpg" onclick="openLightbox(this.src)">
@@ -244,7 +262,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第17组</h2>
 <div class="img-wrap">
 <img class="img-1" src="33.jpg" onclick="openLightbox(this.src)">
@@ -252,7 +270,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第18组</h2>
 <div class="img-wrap">
 <img class="img-1" src="35.jpg" onclick="openLightbox(this.src)">
@@ -260,7 +278,7 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<section class="apple-card" onclick="toggleSelect(this)">
+<section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">第19组</h2>
 <div class="img-wrap">
 <img class="img-1" src="37.jpg" onclick="openLightbox(this.src)">
@@ -269,32 +287,61 @@ body{background:url("pattern-bg.png") center/420px auto repeat;min-height:100vh;
 </div>
 </section>
 </main>
+
+<!-- 新增：卡片居中浮层容器 -->
+<div class="card-overlay" id="cardOverlay" onclick="closeCard()">
+  <div id="overlayContent"></div>
+</div>
+
 <div class="lightbox" id="lightbox">
 <button class="lightbox-close" onclick="closeLightbox()">✕</button>
 <img class="lightbox-img" id="lightboxImg">
 </div>
+
 <script>
-// 卡片点击逻辑
-function toggleSelect(cardEl){
-  // 如果已经选中，取消选中，恢复全部卡片
-  if(cardEl.classList.contains('selected')){
-    document.querySelectorAll('.apple-card').forEach(card=>{
-      card.classList.remove('selected','hidden');
-    })
-    return;
-  }
-  // 清空所有状态
-  document.querySelectorAll('.apple-card').forEach(card=>{
-    card.classList.remove('selected');
+const overlay = document.getElementById('cardOverlay');
+const overlayContent = document.getElementById('overlayContent');
+
+// 打开卡片，放入浮层，背景锁定
+function openCard(cardEl){
+  // 复制卡片DOM放到浮层里面
+  overlayContent.innerHTML = cardEl.outerHTML;
+  overlay.classList.add('active');
+  // 其余卡片隐藏
+  document.querySelectorAll('.gallery .apple-card').forEach(card=>{
     card.classList.add('hidden');
   })
-  // 当前卡片居中放大
-  cardEl.classList.remove('hidden');
-  cardEl.classList.add('selected');
+  // 锁定页面滚动（背景固定不动）
+  document.body.classList.add('lock-scroll');
+
+  // 重新绑定浮层内【展开按钮】事件（复制后的dom需要重新绑定，修复bug）
+  overlayContent.querySelector('.toggle-btn').onclick = function(e){
+    e.stopPropagation();
+    const wrap=this.parentElement;
+    wrap.classList.toggle('open');
+    this.innerText=wrap.classList.contains('open')?'收起':'展开2';
+  }
+  // 重新绑定浮层内图片点击预览
+  overlayContent.querySelectorAll('.img-wrap img').forEach(img=>{
+    img.onclick = function(e){
+      e.stopPropagation();
+      openLightbox(this.src);
+    }
+  })
 }
 
-// 堆叠图片展开按钮
-document.querySelectorAll('.toggle-btn').forEach(btn=>{
+// 关闭卡片浮层，恢复网格，解锁滚动
+function closeCard(){
+  overlay.classList.remove('active');
+  overlayContent.innerHTML = '';
+  document.querySelectorAll('.gallery .apple-card').forEach(card=>{
+    card.classList.remove('hidden');
+  })
+  document.body.classList.remove('lock-scroll');
+}
+
+// 首页卡片展开按钮逻辑
+document.querySelectorAll('.gallery .toggle-btn').forEach(btn=>{
 btn.onclick=function(e){
 e.stopPropagation();
 const wrap=this.parentElement;
@@ -316,6 +363,7 @@ document.body.style.overflow='hidden';
 }
 function closeLightbox(){
 lightbox.classList.remove('active');
+lightboxImg.src='';
 document.body.style.overflow='';
 }
 lightboxImg.addEventListener('wheel',e=>{
@@ -347,7 +395,12 @@ isDrag=true;startX=e.touches[0].pageX-posX;startY=e.touches[0].pageY-posY;
 }
 })
 lightboxImg.addEventListener('touchend',()=>isDrag=false)
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()})
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeLightbox();
+    closeCard();
+  }
+})
 lightbox.onclick=e=>{if(e.target===lightbox)closeLightbox()}
 </script>
 </body>
