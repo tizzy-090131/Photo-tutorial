@@ -79,7 +79,7 @@ body.lock-scroll{overflow:hidden;}
 }
 .img-wrap.normal.open .img-1{margin-bottom:14px}
 
-/* ========== 第24组：4张图片 堆叠样式（收起叠一起，展开垂直排列） ========== */
+/* ========== 第24组：4张图片 堆叠样式 ========== */
 .img-wrap.four-stack img{
   position:absolute;
   top:0;
@@ -155,7 +155,7 @@ body.lock-scroll{overflow:hidden;}
 .lightbox-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);color:#f5f5f7;border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .lightbox-close:hover{background:rgba(255,255,255,.24)}
 
-/* 手机端：依旧保持2列，只有特别小屏幕才变回1列 */
+/* 手机端 */
 @media (max-width:520px){
   .gallery{grid-template-columns:repeat(2,1fr);gap:24px;}
   body{padding:36px 14px}
@@ -173,14 +173,16 @@ body.lock-scroll{overflow:hidden;}
 <p class="page-sub">仅浮层展开图片后，才允许上下滚动</p>
 </header>
 <main class="gallery">
+<!-- 第1组【已修改文件名】 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">海边拍照</h2>
 <div class="img-wrap normal">
-<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/01 (2).jpg" onclick="openLightbox(this.src)">
+<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/012.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/02 (2).jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第2组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">海边拍照</h2>
 <div class="img-wrap normal">
@@ -189,6 +191,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第3组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">餐厅拍照</h2>
 <div class="img-wrap normal">
@@ -197,6 +200,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第4组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">餐厅拍照</h2>
 <div class="img-wrap normal">
@@ -205,6 +209,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第5组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">餐厅拍照</h2>
 <div class="img-wrap normal">
@@ -213,6 +218,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第6组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">日出拍照</h2>
 <div class="img-wrap normal">
@@ -221,6 +227,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第7组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">日出拍照</h2>
 <div class="img-wrap normal">
@@ -229,6 +236,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第8组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">日出拍照</h2>
 <div class="img-wrap normal">
@@ -237,6 +245,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第9组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">山顶拍照</h2>
 <div class="img-wrap normal">
@@ -245,6 +254,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第10组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">山顶拍照</h2>
 <div class="img-wrap normal">
@@ -253,6 +263,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第11组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">机场拍照</h2>
 <div class="img-wrap normal">
@@ -261,6 +272,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第12组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">KTV拍照</h2>
 <div class="img-wrap normal">
@@ -269,6 +281,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第13组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">KTV拍照</h2>
 <div class="img-wrap normal">
@@ -277,6 +290,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第14组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">KTV拍照</h2>
 <div class="img-wrap normal">
@@ -285,6 +299,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第15组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">书店拍照</h2>
 <div class="img-wrap normal">
@@ -293,6 +308,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第16组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">书店拍照</h2>
 <div class="img-wrap normal">
@@ -301,6 +317,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第17组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">生日拍照</h2>
 <div class="img-wrap normal">
@@ -309,6 +326,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第18组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">生日拍照</h2>
 <div class="img-wrap normal">
@@ -317,6 +335,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第19组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">生日拍照</h2>
 <div class="img-wrap normal">
@@ -325,6 +344,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第20组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -333,6 +353,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第21组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -341,6 +362,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第22组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -349,26 +371,45 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
-<!-- ====================== 第24组（4张堆叠图）====================== -->
-<section class="apple-card" onclick="openCard(this)">
-<h2 class="group-title">待命名</h2>
-<div class="img-wrap four-stack">
-<img class="img-s1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/51.jpg" onclick="openLightbox(this.src)">
-<img class="img-s2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/52.jpg" onclick="openLightbox(this.src)">
-<img class="img-s3" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/53.jpg" onclick="openLightbox(this.src)">
-<img class="img-s4" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/54.jpg" onclick="openLightbox(this.src)">
-<button class="toggle-btn">展开4</button>
-</div>
-</section>
-<!-- ============================================================== -->
+<!-- 第23组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
-<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/49.jpg" onclick="openLightbox(this.src)">
-<img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/50.jpg" onclick="openLightbox(this.src)">
+<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/45.jpg" onclick="openLightbox(this.src)">
+<img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/46.jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- ====================== 第24组【4张图】====================== -->
+<section class="apple-card" onclick="openCard(this)">
+<h2 class="group-title">待命名</h2>
+<div class="img-wrap four-stack">
+<img class="img-s1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/47.jpg" onclick="openLightbox(this.src)">
+<img class="img-s2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/48.jpg" onclick="openLightbox(this.src)">
+<img class="img-s3" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/49.jpg" onclick="openLightbox(this.src)">
+<img class="img-s4" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/50.jpg" onclick="openLightbox(this.src)">
+<button class="toggle-btn">展开4</button>
+</div>
+</section>
+<!-- ====================== 第25组 ====================== -->
+<section class="apple-card" onclick="openCard(this)">
+<h2 class="group-title">待命名</h2>
+<div class="img-wrap normal">
+<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/51.jpg" onclick="openLightbox(this.src)">
+<img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/52.jpg" onclick="openLightbox(this.src)">
+<button class="toggle-btn">展开2</button>
+</div>
+</section>
+<!-- 第26组 -->
+<section class="apple-card" onclick="openCard(this)">
+<h2 class="group-title">待命名</h2>
+<div class="img-wrap normal">
+<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/53.jpg" onclick="openLightbox(this.src)">
+<img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/54.jpg" onclick="openLightbox(this.src)">
+<button class="toggle-btn">展开2</button>
+</div>
+</section>
+<!-- 第27组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -377,6 +418,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第28组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -385,6 +427,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第29组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -393,6 +436,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第30组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -401,6 +445,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第31组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -409,6 +454,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第32组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -417,6 +463,7 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第33组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
@@ -425,11 +472,21 @@ body.lock-scroll{overflow:hidden;}
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
+<!-- 第34组 -->
 <section class="apple-card" onclick="openCard(this)">
 <h2 class="group-title">待命名</h2>
 <div class="img-wrap normal">
 <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/69.jpg" onclick="openLightbox(this.src)">
 <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/70.jpg" onclick="openLightbox(this.src)">
+<button class="toggle-btn">展开2</button>
+</div>
+</section>
+<!-- 第35组 -->
+<section class="apple-card" onclick="openCard(this)">
+<h2 class="group-title">待命名</h2>
+<div class="img-wrap normal">
+<img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/71.jpg" onclick="openLightbox(this.src)">
+<img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/72.jpg" onclick="openLightbox(this.src)">
 <button class="toggle-btn">展开2</button>
 </div>
 </section>
