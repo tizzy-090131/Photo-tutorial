@@ -1,83 +1,171 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mint Water Photography</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", PingFang SC, Helvetica, sans-serif;
-            background-image: url("https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/pattern-bg.png");
-            background-size: 420px;
-            background-repeat: repeat;
-            margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .card {
-            background: rgba(255,255,255,0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            width: 100%;
-            max-width: 460px;
-            border-radius: 40px;
-            border:1px solid rgba(0,0,0,.06);
-            padding: 60px 36px;
-            box-shadow: 0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.12);
-        }
-        .title-area {
-            margin-bottom: 64px;
-            text-align: left;
-        }
-        .title-area h1 {
-            font-size: 34px;
-            margin: 0 0 12px;
-            color: #1d1d1f;
-            letter-spacing:-0.02em;
-        }
-        .title-area p {
-            font-size: 18px;
-            color: #424245;
-            margin: 0;
-            line-height:1.5;
-        }
-        .btn-group {
-            display: flex;
-            gap: 18px;
-            justify-content: center;
-            flex-wrap:wrap;
-        }
-        .capsule-btn {
-            background: #000000;
-            color: #fff;
-            border: none;
-            border-radius: 999px;
-            padding: 14px 34px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.24s ease;
-        }
-        .capsule-btn:hover {
-            opacity:0.82;
-            transform: translateY(-2px);
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mint Water Photography</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 48px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      PingFang SC, Helvetica, Arial, sans-serif;
+
+    background:
+      radial-gradient(circle at 15% 10%, rgba(180, 255, 220, 0.55), transparent 26%),
+      radial-gradient(circle at 85% 20%, rgba(120, 220, 210, 0.35), transparent 28%),
+      radial-gradient(circle at 50% 90%, rgba(140, 230, 200, 0.45), transparent 32%),
+      linear-gradient(160deg, #e8f7f2 0%, #d7f1ec 45%, #c8ebe6 100%);
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 440px;
+    margin-top: 6vh;
+    padding: 56px 36px 44px;
+
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 34px;
+
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 -1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 18px 45px rgba(90, 160, 140, 0.18),
+      0 8px 18px rgba(120, 180, 160, 0.12),
+      0 2px 6px rgba(110, 160, 140, 0.08);
+
+    backdrop-filter: saturate(180%) blur(28px);
+    -webkit-backdrop-filter: saturate(180%) blur(28px);
+  }
+
+  .title-block {
+    text-align: left;
+    margin-bottom: 52px;
+    min-height: 90px;
+  }
+
+  .main-title {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: #4fa897;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.8),
+      0 4px 14px rgba(100, 200, 170, 0.35);
+  }
+
+  .sub-text {
+    font-size: 18px;
+    color: #424245;
+    margin-top:12px;
+    line-height:1.5;
+  }
+
+  .capsule-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .apple-capsule {
+    min-width: 150px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: #133028;
+
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 -1px 0 rgba(255, 255, 255, 0.35) inset,
+      0 10px 24px rgba(90, 160, 140, 0.18),
+      0 4px 10px rgba(110, 180, 160, 0.12);
+
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .apple-capsule:hover {
+    transform: translateY(-2px);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 100%);
+
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95) inset,
+      0 -1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 14px 30px rgba(80, 150, 130, 0.22),
+      0 6px 14px rgba(100, 170, 150, 0.14);
+  }
+
+  .apple-capsule:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding: 36px 14px;
+      align-items: flex-start;
+    }
+
+    .glass-card {
+      margin-top: 4vh;
+      padding: 44px 24px 36px;
+      border-radius: 28px;
+    }
+
+    .main-title {
+      font-size: 34px;
+    }
+
+    .apple-capsule {
+      min-width: 130px;
+      padding: 13px 22px;
+      font-size: 14px;
+    }
+  }
+</style>
 </head>
+
 <body>
-    <div class="card">
-        <div class="title-area">
-            <h1>Mint Water Photography</h1>
-            <p>待填写描述文字，以后随时修改</p>
-        </div>
-        <div class="btn-group">
-            <!-- 跳转链接：指向你的相册页面 gallery.html -->
-            <a href="https://tizzy-090131.github.io/Photo-tutorial/gallery.html" class="capsule-btn">摄影技巧</a>
-            <a href="#" class="capsule-btn">拍照姿势</a>
-        </div>
+  <div class="glass-card">
+    <div class="title-block">
+      <h1 class="main-title">Mint Water</h1>
+      <p class="sub-text">删了吧，没意义的歌</p>
     </div>
+
+    <div class="capsule-group">
+      <a
+        class="apple-capsule"
+        href="https://tizzy-090131.github.io/Photo-tutorial/gallery.html"
+      >
+        摄影技巧
+      </a>
+      <a class="apple-capsule" href="#">
+        拍照姿势
+      </a>
+    </div>
+  </div>
 </body>
 </html>
