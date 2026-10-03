@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mint Water Photography - 拍照姿势</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;}
+body{
+    background:url("https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/pattern-bg.png") center/420px auto repeat;
+    min-height:100vh;
+    padding:56px 20px;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",PingFang SC,Helvetica,Arial,sans-serif;
+    color:#1d1d1f;
+}
+body.lock-scroll{overflow:hidden;}
+.page-header{text-align:center;margin-bottom:48px}
+.page-title{
+    font-size:clamp(28px,5vw,40px);
+    font-weight:700;
+    letter-spacing:-0.03em;
+    color:#4fa897;
+    margin-bottom:12px;
+}
+.page-desc{
+    font-size:17px;
+    color:#424245;
+}
+.container{
+    max-width:920px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:32px;
+}
+.apple-card{
+    background:rgba(255,255,255,0.62);
+    border:1px solid rgba(255,255,255,0.68);
+    border-radius:28px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    transition:all 0.24s ease;
+    cursor:pointer;
+}
+.apple-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 40px rgba(0,0,0,0.09);
+}
+.group-title{
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+.img-wrap{
+    position:relative;
+    min-height:220px;
+}
+.img-wrap img{
+    width:82%;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:18px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.12);
+    transition:all 0.3s cubic-bezier(0.25,0.1,0.25,1);
+    object-fit:cover;
+    aspect-ratio:4/3;
+}
+.img-1{top:0;z-index:3;transform:translateX(-50%) rotate(-2.5deg);}
+.img-2{top:0;z-index:2;transform:translateX(-50%) rotate(2.5deg);}
+.img-wrap.open .img-1{
+    position:static;
+    transform:none;
+    width:100%;
+    margin-bottom:14px;
+    rotate:0deg;
+}
+.img-wrap.open .img-2{
+    position:static;
+    transform:none;
+    width:100%;
+    rotate:0deg;
+}
+.toggle-btn{
+    margin-top:16px;
+    padding:10px 20px;
+    border-radius:999px;
+    border:none;
+    background:rgba(0,0,0,0.07);
+    font-size:14px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:0.2s;
+}
+.toggle-btn:active{scale:0.96;}
+/* 灯箱大图预览 */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.86);
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.lightbox.show{display:flex;}
+.lightbox img{
+    max-width:94%;
+    max-height:94vh;
+    border-radius:12px;
+}
+.lightbox-close{
+    position:absolute;
+    top:24px;
+    right:24px;
+    color:#fff;
+    font-size:32px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+}
+@media (max-width:640px){
+    .container{grid-template-columns:1fr;}
+    .apple-card{padding:20px;}
+}
+</style>
+</head>
+<body>
+<div class="page-header">
+    <h1 class="page-title">拍照姿势</h1>
+    <p class="page-desc">Mint Water Photography</p>
+</div>
+<div class="container">
+
+<!-- ========== 第1组 2张 a1 a2 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a1.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a2.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第2组 2张 a3 a4 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a3.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a4.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第3组 2张 a5 a6 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a5.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a6.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第4组 2张 a7 a8 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a7.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a8.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第5组 2张 a9 a10 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a9.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a10.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第6组 2张 a11 a12 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a11.jpg" onclick="openLightbox(this.src)">
+        <img class="img-2" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a12.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第7组 单张 a13 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a13.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第8组 单张 a14 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a14.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第9组 单张 a15 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a15.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第10组 单张 a16 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a16.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第11组 单张 a17 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a17.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第12组 单张 a18 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a18.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第13组 单张 a19 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a19.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第14组 单张 a20 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a20.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第15组 单张 a21 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a21.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第16组 单张 a22 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a22.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第17组 单张 a23 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a23.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第18组 单张 a24 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a24.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第19组 单张 a25 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a25.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第20组 单张 a26 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a26.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第21组 单张 a27 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a27.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第22组 单张 a28 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a28.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第23组 单张 a29 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a29.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第24组 单张 a30 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a30.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第25组 单张 a31 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a31.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第26组 单张 a32 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a32.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第27组 单张 a33 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a33.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第28组 单张 a34 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a34.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第29组 单张 a35 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a35.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第30组 单张 a36 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a36.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第31组 单张 a37 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a37.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第32组 单张 a38 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a38.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第33组 单张 a39 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a39.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第34组 单张 a40 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a40.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第35组 单张 a41 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a41.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第36组 单张 a42 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a42.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第37组 单张 a43 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a43.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第38组 单张 a44 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a44.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第39组 单张 a45 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a45.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第40组 单张 a46 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a46.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+<!-- ========== 第41组 单张 a47 ========== -->
+<section class="apple-card" onclick="openCard(this)">
+    <h2 class="group-title">待命名</h2>
+    <div class="img-wrap">
+        <img class="img-1" src="https://cdn.jsdelivr.net/gh/tizzy-090131/Photo-tutorial/a47.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button class="toggle-btn">展开</button>
+</section>
+
+</div>
+
+<!-- 灯箱弹窗 -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <img id="light-img" src="">
+</div>
+
+<script>
+//卡片展开收起
+function openCard(el){
+    const wrap = el.querySelector('.img-wrap');
+    wrap.classList.toggle('open');
+    const btn = el.querySelector('.toggle-btn');
+    btn.innerText = wrap.classList.contains('open') ? "收起" : "展开";
+}
+//大图预览
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('light-img');
+function openLightbox(src){
+    event.stopPropagation();
+    lbImg.src = src;
+    lb.classList.add('show');
+    document.body.classList.add('lock-scroll');
+}
+function closeLightbox(){
+    lb.classList.remove('show');
+    document.body.classList.remove('lock-scroll');
+}
+lb.onclick = function(e){
+    if(e.target === lb) closeLightbox();
+}
+</script>
+</body>
+</html>
